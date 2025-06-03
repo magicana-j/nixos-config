@@ -37,7 +37,7 @@
     git = {
       enable = true;
       userName = "Your Name";
-      userEmail = "your.email@example.com";
+      userEmail = "";
     };
     
     # Bash設定
@@ -64,8 +64,8 @@
     };
     
     # VS Code settings
-    ".config/Code/User/settings.json".source = ./dotfiles/vscode/settings.json;
-    ".config/Code/User/keybindings.json".source = ./dotfiles/vscode/keybindings.json;
+    ".config/Code/User/settings.json".source = ./dotfiles/Code/settings.json;
+    ".config/Code/User/keybindings.json".source = ./dotfiles/Code/keybindings.json;
   };
 
   # セッション変数
