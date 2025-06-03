@@ -18,7 +18,22 @@
     
     # メディア関連
     obs-studio
+
+    # OBS用プラグイン・依存関係
+    v4l-utils
+
+    # 日本語入力関連
+    fcitx5
+    fcitx5-mozc
+    fcitx5-gtk
+    fcitx5-configtool
     
+    # フォント
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    source-code-pro
+    noto-fonts-emoji
+
     # その他の便利ツール
     firefox
     git
@@ -72,5 +87,14 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     BROWSER = "firefox";
+
+    # Fcitx5 環境変数
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
   };
+
+  # フォント設定
+  fonts.fontconfig.enable = true;
+
 }
