@@ -14,7 +14,7 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations.amuharai = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."Your username" = home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs;
         modules = [
           ./home.nix
