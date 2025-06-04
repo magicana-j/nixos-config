@@ -23,12 +23,6 @@
 
     # OBS用プラグイン・依存関係
     v4l-utils
-
-    # 日本語入力関連
-    fcitx5
-    fcitx5-mozc
-    fcitx5-gtk
-    fcitx5-configtool
     
     # フォント
     noto-fonts-cjk-sans
@@ -45,7 +39,7 @@
     htop
   ];
 
-　　i18n.inputMethod = {
+  i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
     fcitx5.addons = [pkgs.fcitx5-mozc];
