@@ -1,10 +1,6 @@
 {
     description = "NixOS mermaid (GNOME + Hyprland)";
 
-    imports = [
-        ./dotfiles.nix
-    ];
-
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
         home-manager = {
@@ -23,6 +19,7 @@
                 specialArgs = { inherit inputs; };
                 modules = [
                     ./modules/system/configuration.nix
+                    ./dotfiles.nix
                     home-manager.nixosModules.home-manager
                     {
                         home-manager.useGlobalPkgs = true;
