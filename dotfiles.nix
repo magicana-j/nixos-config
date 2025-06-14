@@ -21,7 +21,7 @@ in
 {
   # ~/.config 以下に張るなら xdg.configFile が最も簡潔
   xdg.configFile = cfgAttrset;
-  xdg.enable = true;
-  
+  #xdg.enable = true;
+
   # もし ~/.config 以外にも張りたい場合は home.file で同様に作れる
 }
