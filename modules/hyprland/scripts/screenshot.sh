@@ -17,36 +17,7 @@ fi
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 FILENAME="${SAVE_DIR}/screenshot_${TIMESTAMP}.png"
 
-# スクリーンショットの種類
-MODE="$1" # 'region', 'full', 'window'
-
-case "$MODE" in
-    region)
-        # 領域選択
-        SELECTED_GEOMETRY=$(slurp)
-        if [ -z "$SELECTED_GEOMETRY" ]; then
-            exit 1 # 選択をキャンセルした場合
-        fi
-        grim -g "$SELECTED_GEOMETRY" "$FILENAME"
-        ;;
-    full)
-        # 全画面
-        grim "$FILENAME"
-        ;;
-    window)
-        # アクティブウィンドウ (grimは直接ウィンドウ選択をサポートしないため、grimshotなどのラッパーを使うか、手動でウィンドウ情報を取得する必要がある)
-        # または、grimshotなどのツールを使うのが簡単
-        # この例では、grim + slurp の組み合わせを強調するため、grim単体でのウィンドウ取得は割愛します。
-        # 代替として、grimshotのようなツールを検討してください。
-        # 例：grimshot save active "$FILENAME"
-        # あるいは、手動でgrimにウィンドウの座標を渡す（複雑になる）
-        grim "$FILENAME" # とりあえず全画面を撮るか、手動で座標を指定
-        ;;
-    *)
-        echo "Usage: $0 [region|full|window]"
-        exit 1
-        ;;
-esac
+grim $FILENAME
 
 # スクリーンショットが成功したか確認
 if [ -f "$FILENAME" ]; then
