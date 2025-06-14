@@ -3,7 +3,9 @@
 {
     imports = [
         ../hyprland/hyprland.nix
+        #../nvim/nvim.nix
         ../kitty/kitty.nix
+        #../alacritty/alacritty.nix
     ];
 
     home.username = "amuharai";
