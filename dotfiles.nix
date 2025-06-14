@@ -6,28 +6,21 @@ let
 in
 {
   # ── Neovim ───────────────────────────────
-  home.file.".config/nvim".source =
-    lib.file.mkOutOfStoreSymlink "${dot}/nvim";
+  home.file.".config/nvim".source = lib.file.mkOutOfStoreSymlink "${dot}/nvim";
 
   # ── Waybar ───────────────────────────────
-  home.file.".config/waybar".source =
-    lib.file.mkOutOfStoreSymlink "${dot}/waybar";
+  home.file.".config/waybar".source = lib.file.mkOutOfStoreSymlink "${dot}/waybar";
 
   # ── kitty の単一ファイル例 ────────────────
-  home.file.".config/kitty/kitty.conf".source =
-    lib.file.mkOutOfStoreSymlink "${dot}/kitty/kitty.conf";
+  home.file.".config/kitty/kitty.conf".source = lib.file.mkOutOfStoreSymlink "${dot}/kitty/kitty.conf";
 
   # その他
-  home.file.".config/alacritty".source =
-    lib.file.mkOutOfStoreSymlink "${dot}/alacritty";
+  home.file.".config/alacritty".source = lib.file.mkOutOfStoreSymlink "${dot}/alacritty";
 
-  home.file.".config/tmux".source =
-    lib.file.mkOutOfStoreSymlink "${dot}/tmux";
+  home.file.".config/tmux".source = lib.file.mkOutOfStoreSymlink "${dot}/tmux";
 
-  home.file.".config/labwc".source =
-    lib.file.mkOutOfStoreSymlink "${dot}/labwc";
+  home.file.".config/labwc".source = lib.file.mkOutOfStoreSymlink "${dot}/labwc";
 
-  home.file.".config/niri".source =
-    lib.file.mkOutOfStoreSymlink "${dot}/niri";
+  home.file.".config/niri".source = lib.file.mkOutOfStoreSymlink "${dot}/niri";
 
 }
