@@ -13,19 +13,19 @@
     };
 
     # 設定ファイルを別置き
-    xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
+#    xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
 
-    home.packages = with pkgs; [
-        waybar
-        #rofi-wayland
-        wofi kitty alacritty foot
-        xdg-desktop-portal
-        xdg-desktop-portal-hyprland
-        networkmanagerapplet
-        wl-clipboard grim slurp sway-contrib.grimshot
-        swaylock swaybg mako
-        xfce.thunar xfce.thunar-volman xfce.thunar-archive-plugin
-    ];
+#    home.packages = with pkgs; [
+#        waybar
+#        #rofi-wayland
+#        wofi kitty alacritty foot
+#        xdg-desktop-portal
+#        xdg-desktop-portal-hyprland
+#        networkmanagerapplet
+#        wl-clipboard grim slurp sway-contrib.grimshot
+#        swaylock swaybg mako
+#        xfce.thunar xfce.thunar-volman xfce.thunar-archive-plugin
+#    ];
 
     home.sessionVariables = {
         XDG_CURRENT_DESKTOP = "Hyprland";

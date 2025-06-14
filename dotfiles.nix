@@ -1,27 +1,33 @@
-# dotfiles.nix  ― home-manager module
 { config, lib, ... }:
 
 let
-  # dotfiles を置いている場所（flaks 内なら相対パスで OK）
-  dotfilesDir = ./dotfiles;
-
-  # dotfilesDir 直下の “ディレクトリ” 名だけを抽出
-  dirs =
-    lib.attrNames
-      (lib.filterAttrs (_: t: t == "directory")
-        (builtins.readDir dotfilesDir));
-
-  # 生成:  { "<dirName>" = { source = "<absolute path>"; }; }  という attrset
-  cfgAttrset = lib.genAttrs dirs (name: {
-    # ~/.config/<name> にリンクされる
-    source = "${dotfilesDir}/${name}";
-    # recursive は false（既定）のまま → ディレクトリごと symlink
-  });
+  # dotfiles 置き場（絶対パス推奨）
+  dot = "${config.home.homeDirectory}/nixos-config/dotfiles";
 in
 {
-  # ~/.config 以下に張るなら xdg.configFile が最も簡潔
-  xdg.configFile = cfgAttrset;
-  #xdg.enable = true;
+  # ── Neovim ───────────────────────────────
+  home.file.".config/nvim".source =
+    lib.file.mkOutOfStoreSymlink "${dot}/nvim";
 
-  # もし ~/.config 以外にも張りたい場合は home.file で同様に作れる
+  # ── Waybar ───────────────────────────────
+  home.file.".config/waybar".source =
+    lib.file.mkOutOfStoreSymlink "${dot}/waybar";
+
+  # ── kitty の単一ファイル例 ────────────────
+  home.file.".config/kitty/kitty.conf".source =
+    lib.file.mkOutOfStoreSymlink "${dot}/kitty/kitty.conf";
+
+  # その他
+  home.file.".config/alacritty".source =
+    lib.file.mkOutOfStoreSymlink "${dot}/alacritty";
+
+  home.file.".config/tmux".source =
+    lib.file.mkOutOfStoreSymlink "${dot}/tmux";
+
+  home.file.".config/labwc".source =
+    lib.file.mkOutOfStoreSymlink "${dot}/labwc";
+
+  home.file.".config/niri".source =
+    lib.file.mkOutOfStoreSymlink "${dot}/niri";
+
 }

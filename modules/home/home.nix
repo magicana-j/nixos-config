@@ -42,6 +42,16 @@
 
         vscode
 
+        waybar
+        #rofi-wayland
+        wofi kitty alacritty foot
+        xdg-desktop-portal
+        xdg-desktop-portal-hyprland
+        networkmanagerapplet
+        wl-clipboard grim slurp sway-contrib.grimshot
+        swaylock swaybg mako
+        xfce.thunar xfce.thunar-volman xfce.thunar-archive-plugin
+
     ];
 
     home.file = {
