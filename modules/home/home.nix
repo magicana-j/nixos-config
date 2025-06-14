@@ -2,7 +2,8 @@
 
 {
     imports = [
-
+        ../hyprland/hyprland.nix
+        ../kitty/kitty.nix
     ];
 
     home.username = "amuharai";
@@ -15,8 +16,6 @@
         htop
         fastfetch
         tree
-
-	git curl wget
 
         noto-fonts
         noto-fonts-cjk-sans

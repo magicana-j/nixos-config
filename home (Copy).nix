@@ -16,8 +16,6 @@
         fastfetch
         tree
 
-	git curl wget
-
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
