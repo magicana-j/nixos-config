@@ -3,6 +3,7 @@
 {
     imports = [
         ../hyprland/hyprland.nix
+        ../../dotfiles.nix
         #../nvim/nvim.nix
         #../kitty/kitty.nix
         #../alacritty/alacritty.nix
