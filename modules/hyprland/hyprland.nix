@@ -13,7 +13,7 @@
     };
 
     # 設定ファイルを別置き
-#    xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
+    xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
 
 #    home.packages = with pkgs; [
 #        waybar
