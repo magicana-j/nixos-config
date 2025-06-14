@@ -1,0 +1,86 @@
+/* Nord カラーパレットに基づく */
+@define-color nord0   #2E3440;
+@define-color nord1   #3B4252;
+@define-color nord2   #434C5E;
+@define-color nord3   #4C566A;
+@define-color nord4   #D8DEE9;
+@define-color nord5   #E5E9F0;
+@define-color nord6   #ECEFF4;
+@define-color nord7   #8FBCBB;
+@define-color nord8   #88C0D0;
+@define-color nord9   #81A1C1;
+@define-color nord10  #5E81AC;
+@define-color nord11  #BF616A;
+@define-color nord12  #D08770;
+@define-color nord13  #EBCB8B;
+@define-color nord14  #A3BE8C;
+@define-color nord15  #B48EAD;
+
+* {
+    font-family: "Noto Sans CJK JP", "Source Code Pro", "Font Awesome 6 Free", "Material Symbols Outlined";
+    font-size: 16px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    min-height: 40px;
+}
+
+window#waybar {
+    background-color: rgba(46, 52, 64, 0.95); /* nord0 with transparency */
+    color: @nord6;
+    border-bottom: 1px solid @nord3;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    margin: 0 4px;
+    border-radius: 5px;
+    background: transparent;
+    color: @nord4;
+}
+
+#workspaces button.focused {
+    background: @nord8;
+    color: @nord0;
+}
+
+#cpu,
+#memory,
+#temperature,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#tray {
+    padding: 0 10px;
+    margin: 0 4px;
+    background-color: @nord1;
+    border-radius: 5px;
+    color: @nord5;
+}
+
+#battery.charging {
+    color: @nord14;
+}
+#battery.warning {
+    color: @nord13;
+}
+#battery.critical {
+    color: @nord11;
+}
+
+#pulseaudio.muted {
+    color: @nord3;
+}
+
+#cpu {
+    color: @nord5;
+}
+
+#memory {
+    color: @nord5;
+}
+
+#temperature {
+    color: @nord5;
+}

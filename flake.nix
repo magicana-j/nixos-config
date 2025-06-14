@@ -1,6 +1,10 @@
 {
     description = "NixOS mermaid (GNOME + Hyprland)";
 
+    imports = [
+        ./dotfiles.nix
+    ];
+
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
         home-manager = {

@@ -1,0 +1,57 @@
+# niri config.kdl - basic Japanese keyboard and fcitx5 setup
+
+output "eDP-1" {
+    scale 1.5
+}
+
+input "keyboard" {
+    layout "jp"
+}
+
+exec-on-startup {
+    command "fcitx5 -d"
+    command "waybar" # 必要であればステータスバーを起動
+    command "swaybg -i /path/to/background.jpg" # 背景画像（任意）
+}
+
+# 基本的なウィンドウ管理
+workspace {
+    initial "1"
+}
+
+cursor {
+    theme "Adwaita"
+    size 24
+}
+
+binding {
+    # ターミナル起動（例：foot）
+    combination "Super+Return"
+    command "launch foot"
+}
+
+binding {
+    # アプリランチャー起動（例：fuzzel）
+    combination "Super+D"
+    command "launch fuzzel"
+}
+
+binding {
+    combination "Super+Shift+Q"
+    command "close"
+}
+
+binding {
+    combination "Super+Left"
+    command "focus left"
+}
+
+binding {
+    combination "Super+right"
+    command "focus right"
+}
+
+binding {
+    combination "Super+Shift+E"
+    command "exit"
+}
