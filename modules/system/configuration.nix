@@ -111,9 +111,9 @@
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
-　　　　nix.settings = {
-　　　　　　max-jobs = 2;  # 並列ジョブ数
-		     cores = 2;     # 各ジョブで使用するCPUコア数
+    nix.settings = {
+        max-jobs = 2;  # 並列ジョブ数
+        cores = 2;     # 各ジョブで使用するCPUコア数
     };
 
     # Some programs need SUID wrappers, can be configured further or are
