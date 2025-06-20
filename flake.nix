@@ -21,8 +21,8 @@
                     ./modules/system/configuration.nix
                     home-manager.nixosModules.home-manager
                     {
-                        home-manager.useGlobalPkgs = true;
-                        home-manager.useUserPackages = true;     # soon be depricated
+                        #home-manager.useGlobalPkgs = true;     # soon be depricated
+                        home-manager.useUserPackages = true;
                         home-manager.users.amuharai = ./modules/home/home.nix;
                     }
                 ];
