@@ -8,7 +8,14 @@
 
   # シェルや基本ツール
   programs.zsh.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "magicana-j";
+    userEmail = "";
+    extraConfig = {
+      init.defaultBranch = "main";
+    };
+  };
 
   home.packages = with pkgs; [
     vim
@@ -20,8 +27,6 @@
   ];
 
   # 例: dotfiles的な設定
-  programs.git.userName = "magicana-j";
-  programs.git.userEmail = "";
 
   # ここに fcitx5, terminal, editor, etc…を足していく
 }
