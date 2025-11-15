@@ -12,29 +12,6 @@
   # System packages
   environment.systemPackages = with pkgs; [
     vim
-    ntfs3g exfatprogs
-    htop btop wget curl fastfetch
-    git
-    geany
-    xarchiver p7zip
-
-    # Graphics
-    gimp
-    shotwell
-#    inkscape
-
-    # Video
-    vlc
-
-    # Utilities
-    isoimagewriter
-    lm_sensors
-    gparted
-#    unetbootin
-#    ventoy-full
-
-    # Office
-#    libreoffice-fresh
   ];
 
 }
