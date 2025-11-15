@@ -9,22 +9,22 @@
     ./hardware-configuration.nix
 
 # 以下の2つはいずれかをコメントアウト
-    ../modules/perf-intel-kaby.nix
-#    ../modules/powersave-intel-kaby.nix
+    ../../modules/perf-intel-kaby.nix
+#    ../../modules/powersave-intel-kaby.nix
 
-    ../modules/nix-settings.nix
-    ../modules/audio.nix
-    ../modules/boot.nix
-    ../modules/desktop.nix
-    ../modules/fonts.nix
-    ../modules/localization.nix
-    ../modules/networking.nix
-    ../modules/packages.nix
-    ../modules/programs.nix
-    ../modules/users.nix
-    ../modules/ssh.nix
-    ../modules/tor.nix
-#    ../modules/podman.nix
+    ../../modules/nix-settings.nix
+    ../../modules/audio.nix
+    ../../modules/boot.nix
+    ../../modules/desktop.nix
+    ../../modules/fonts.nix
+    ../../modules/localization.nix
+    ../../modules/networking.nix
+    ../../modules/packages.nix
+    ../../modules/programs.nix
+    ../../modules/users.nix
+    ../../modules/ssh.nix
+    ../../modules/tor.nix
+    ../../modules/podman.nix
   ];
 
   zramSwap = {
