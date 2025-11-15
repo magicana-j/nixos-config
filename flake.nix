@@ -25,10 +25,6 @@
           modules = [
             ./hosts/nixos-cfsz2/configuration.nix
 
-            ./modules/desktop.nix
-            ./modules/fonts.nix
-            ./modules/japanese.nix
-
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
