@@ -19,11 +19,28 @@
 
   home.packages = with pkgs; [
     vim
-    htop
-    btop
-    fastfetch
-    wget
-    curl
+    ntfs3g exfatprogs
+    htop btop wget curl fastfetch
+    geany
+    xarchiver p7zip
+
+    # Graphics
+    gimp
+    shotwell
+    inkscape
+
+    # Video
+    vlc
+
+    # Utilities
+    isoimagewriter
+    lm_sensors
+    gparted
+#    unetbootin
+#    ventoy-full
+
+    # Office
+    libreoffice-fresh
   ];
 
   # 例: dotfiles的な設定
