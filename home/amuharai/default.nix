@@ -29,8 +29,13 @@
     shotwell
     inkscape
 
-    # Video
+    # Multimedia
     vlc
+    obs-studio
+    kooha
+    audacity
+    shotcut
+    handbrake
 
     # Utilities
     isoimagewriter
