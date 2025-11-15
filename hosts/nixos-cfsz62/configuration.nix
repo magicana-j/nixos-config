@@ -7,6 +7,11 @@
 {
   imports = [
     ./hardware-configuration.nix
+
+# 以下の2つはいずれかをコメントアウト
+    ../modules/perf-intel-kaby.nix
+#    ../modules/powersave-intel-kaby.nix
+
     ../modules/nix-settings.nix
     ../modules/audio.nix
     ../modules/boot.nix
