@@ -10,22 +10,19 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... }: {
-    nixosConfigurations.nixos-cfsz62
-    system = "x86_64-linux";
+  outputs = { self, nixpkgs, home-manager, ... }: {
+    nixosConfigurations.nixos-cfsz62 = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
       modules = [
         ./configuration.nix
 
         home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          home-manager.users.amuharai =
-            import ./home/amuharai/default.nix;
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.amuharai = import ./home.nix;
         }
       ];
     };
   };
 }
-
