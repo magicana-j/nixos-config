@@ -7,6 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+  ];
 
   # Bootloader configuration
   boot.loader.systemd-boot.enable = true;
