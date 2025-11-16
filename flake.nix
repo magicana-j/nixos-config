@@ -8,32 +8,24 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... }:
-    let
-      systems = [ "x86_64-linux" ];
-    in
-    flake-utils.lib.eachSystem systems (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in {
-        nixosConfigurations.nixos-cfsz2 = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/nixos-cfsz2/configuration.nix
+  outputs = { self, nixpkgs, home-manager, flake-utils, ... }: {
+    nixosConfigurations.nixos-cfsz62
+    system = "x86_64-linux";
+      modules = [
+        ./configuration.nix
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
 
-              home-manager.users.amuharai =
-                import ./home/amuharai/default.nix;
-            }
-          ];
-        };
-      });
+          home-manager.users.amuharai =
+            import ./home/amuharai/default.nix;
+        }
+      ];
+    };
+  };
 }
+
