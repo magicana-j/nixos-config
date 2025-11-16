@@ -21,6 +21,7 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           users.amuharai = import ./home.nix;
+          backupFileExtension = "backup";
         }
       ];
     };
