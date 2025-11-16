@@ -94,8 +94,7 @@
 
       # 一般ユーザーが追加のsubstituterを使えるようにしたい場合だけ
       trusted-users = [ "root" "amuharai" ];
-
-      };
+    };
 
     # Automatic garbage collection
     gc = {
@@ -103,7 +102,6 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    
   };
   
 
@@ -287,8 +285,6 @@
     enable = true;
     nix-direnv.enable = true;
   };
-
-
 
   system.stateVersion = "25.05";
 }
