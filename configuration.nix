@@ -218,6 +218,23 @@
     LC_TIME = "ja_JP.UTF-8";
   };
 
+
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    
+    # 各ディレクトリを英語名で固定
+    desktop = "$HOME/Desktop";
+    documents = "$HOME/Documents";
+    download = "$HOME/Downloads";
+    music = "$HOME/Music";
+    pictures = "$HOME/Pictures";
+    publicShare = "$HOME/Public";
+    templates = "$HOME/Templates";
+    videos = "$HOME/Videos";
+  };
+
+
   # Keyboard layout
   services.xserver.xkb = {
     layout = "jp";
