@@ -32,7 +32,7 @@
 
     # Multimedia
     vlc
-    obs-studio
+#    obs-studio
     kooha
     audacity
     shotcut
