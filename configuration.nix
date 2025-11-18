@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./profiles/kde.nix
   ];
 
   # Bootloader configuration
@@ -30,21 +31,10 @@
     enable = true;
     powerOnBoot = true;
   };
-
   services.blueman.enable = true;
 
-  # X Server and Desktop Environment
+  # X Server
   services.xserver.enable = true;
-
-#  services.xserver.displayManager.gdm.enable = true;
-#  services.xserver.desktopManager.gnome.enable = true;
-
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
-#  services.xserver.displayManager.lightdm.enable = true;
-#  services.xserver.desktopManager.cinnamon.enable = true;
-
 
   # GNOME keyring
   services.gnome.gnome-keyring.enable = true;
@@ -102,14 +92,29 @@
     };
   };
 
-  # GPU / OpenGL
+  # Intel Graphics最適化
+  boot.initrd.kernelModules = [ "i915" ];
+  services.xserver.videoDrivers = [ "modesetting" ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver
+      intel-compute-runtime
+      vulkan-loader
+      vulkan-validation-layers
       vaapiIntel
     ];
+  };
+
+  boot.kernelParams = [
+    "i915.enable_guc=3"
+    "i915.enable_fbc=1"
+    "i915.fastboot=1"
+  ];
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHd";
   };
 
   # zramで実メモリを稼ぐ
