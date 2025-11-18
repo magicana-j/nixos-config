@@ -46,7 +46,7 @@
 #    ventoy-full
 
     # Office
-    libreoffice-fresh
+#    libreoffice-fresh
   ];
 
   # 例: dotfiles的な設定
