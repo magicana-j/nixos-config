@@ -19,10 +19,9 @@
 
         home-manager.nixosModules.home-manager
         {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.amuharai = import ./home.nix;
-          backupFileExtension = "backup";
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.amuharai = import ./home.nix;
         }
       ];
     };
