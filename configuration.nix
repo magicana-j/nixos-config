@@ -77,6 +77,7 @@
   # Nix package manager settings
   nix = {
     settings = {
+      download-buffer-size = 524288000; # 500 MiB
       auto-optimise-store = true;
       experimental-features = ["nix-command" "flakes"];
 
