@@ -25,19 +25,6 @@
     geany
     xarchiver p7zip
 
-    # Graphics
-    gimp
-    shotwell
-    inkscape
-
-    # Multimedia
-    vlc
-#    obs-studio
-    kooha
-    audacity
-    shotcut
-    handbrake
-
     # Utilities
     isoimagewriter
     lm_sensors
@@ -45,8 +32,6 @@
 #    unetbootin
 #    ventoy-full
 
-    # Office
-#    libreoffice-fresh
   ];
 
   # 例: dotfiles的な設定
