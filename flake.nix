@@ -10,9 +10,10 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, ... }@attrs: {
     nixosConfigurations.nixos-cfsz62 = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = attrs;
       modules = [
         ./configuration.nix
 
