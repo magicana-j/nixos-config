@@ -106,22 +106,15 @@
     };
   };
 
-
-  ############################
   # GPU / OpenGL
-  ############################
-
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [
-      intel-media-driver   # VAAPI
+      intel-media-driver
       vaapiIntel
     ];
   };
-
-  ############################
-  # メモリ・ストレージ
-  ############################
 
   # zramで実メモリを稼ぐ
   zramSwap = {
@@ -138,7 +131,6 @@
 
   # LUKSのdiscard許可（cryptroot 名は各自の構成に合わせて変更）
   # boot.initrd.luks.devices."cryptroot".allowDiscards = true;
-
 
   # Font configuration
   fonts = {
@@ -173,7 +165,7 @@
   time.timeZone = "Asia/Tokyo";
 
   # Localization
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "fr_FR.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ja_JP.UTF-8";
@@ -203,7 +195,6 @@
     fcitx5.waylandFrontend = true;
   };
 
-
   # User account configuration
   users.users.amuharai = {
     isNormalUser = true;
@@ -219,23 +210,6 @@
     ];
   };
 
-  # Shell aliases
-  environment.shellAliases = {
-    ls = "ls -F --color=auto";
-    ll = "ls -lh";
-    la = "ls -la";
-  };
-
-  # Zsh configuration
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-    histSize = 10000;
-  };
-
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -244,13 +218,12 @@
     vim git
   ];
 
-
   # Program configurations
 
-  # Firefox
+  ## Firefox
   programs.firefox.enable = true;
 
-  # Direnv for project-specific environments
+  ## Direnv for project-specific environments
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
