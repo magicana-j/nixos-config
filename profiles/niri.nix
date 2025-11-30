@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  programs.sway = {
+  programs.niri = {
     enable = true;
-    wrapperFeatures.gtk = true;
   };    
 }
