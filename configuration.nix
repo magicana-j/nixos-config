@@ -3,7 +3,13 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./profiles/kde.nix
+#    ./profiles/kde.nix
+    ./profiles/cinnamon.nix
+    ./profiles/waylandtools.nix
+    ./profiles/sway.nix
+    ./profiles/niri.nix
+#    ./profiles/hyprland.nix
+    ./gaming.nix
   ];
 
   # Bootloader configuration
@@ -43,7 +49,7 @@
   # services.xserver.libinput.enable = true;
 
   # Networking configuration
-  networking.hostName = "nixos";
+  networking.hostName = "hermes";
   networking.networkmanager.enable = true;
 
 
@@ -166,7 +172,7 @@
   time.timeZone = "Asia/Tokyo";
 
   # Localization
-  i18n.defaultLocale = "fr_FR.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ja_JP.UTF-8";
@@ -200,7 +206,6 @@
   users.users.amuharai = {
     isNormalUser = true;
     description = "Amuharai";
-    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -219,7 +224,14 @@
     vim git
   ];
 
-  # Program configurations
+  ## bash
+  programs.bash = {
+    completion.enable = true;
+    shellAliases = {
+      nrs = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
+
+    };
+  };
 
   ## Firefox
   programs.firefox.enable = true;
@@ -228,6 +240,21 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+
+  programs.git = {
+    enable = true;
+    config = {
+      init = {
+        user.name = "magicana-j";
+        user.email = "";
+        defaultBranch = "main";
+      };
+      url = {
+        "git@github.com:".insteadOf = "https://github.com/";
+        "ssh://git@github.com".insteadOf = "https://github.com";
+      };
+    };
   };
 
   system.stateVersion = "25.05";
