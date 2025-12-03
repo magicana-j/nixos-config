@@ -222,6 +222,9 @@
   # System packages
   environment.systemPackages = with pkgs; [
     vim git
+    btop htop fastfetch
+　　 geany
+    google-chrome
   ];
 
   ## bash
@@ -259,5 +262,5 @@
     };
   };
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }
