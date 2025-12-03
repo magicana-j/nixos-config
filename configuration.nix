@@ -9,7 +9,7 @@
     ./profiles/sway.nix
     ./profiles/niri.nix
 #    ./profiles/hyprland.nix
-    ./gaming.nix
+#    ./gaming.nix
   ];
 
   # Bootloader configuration
