@@ -4,14 +4,11 @@
   home.username = "amuharai";
   home.homeDirectory = "/home/amuharai";
 
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "25.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
     home-manager
     neovim
-    btop htop fastfetch
-
-    geany
 
 #    podman
 #    podman-compose
