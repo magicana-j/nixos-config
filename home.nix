@@ -12,22 +12,23 @@
     btop htop fastfetch
 
     geany
-    podman
-    podman-compose
 
-    shotwell
-    gimp
-
-    audacity
-    handbrake
-    obs-studio
-    shotcut
-    shotwell
-    vlc
-
-    go
-    rustc
-    nodejs_24
+#    podman
+#    podman-compose
+#
+#    shotwell
+#    gimp
+#
+#    audacity
+#    handbrake
+#    obs-studio
+#    shotcut
+#    shotwell
+#    vlc
+#
+#    go
+#    rustc
+#    nodejs_24
 
   ];
 
