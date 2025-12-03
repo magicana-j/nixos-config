@@ -9,13 +9,14 @@
     dedicatedServer.openFirewall = true;
   };
   
-  nixpkgs.config.packageOverrides = pkgs: {
-    steam = pkgs.steam.override {
-      extraPkgs = pkgs:
-        with pkgs; [
-          migu
-        ];
-    };
-  };
+#  nixpkgs.config.packageOverrides = pkgs: {
+#    steam = pkgs.steam.override {
+#      extraPkgs = pkgs:
+#        with pkgs; [
+#          migu
+#        ];
+#    };
+#  };
+
 }
 
