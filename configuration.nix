@@ -245,9 +245,11 @@
   programs.git = {
     enable = true;
     config = {
+      usr = {
+        name = "amuharai";
+        email = "";
+      };
       init = {
-        user.name = "magicana-j";
-        user.email = "";
         defaultBranch = "main";
       };
       url = {
