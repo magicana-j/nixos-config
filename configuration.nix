@@ -109,7 +109,7 @@
       intel-compute-runtime
       vulkan-loader
       vulkan-validation-layers
-      vaapiIntel
+      intel-vaapi-driver
     ];
   };
 
