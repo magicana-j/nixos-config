@@ -11,6 +11,24 @@
   home.packages = with pkgs; [
     home-manager
     neovim
+
+    podman
+    podman-compose
+
+    shotwell
+    gimp
+
+    audacity
+    handbrake
+    obs-studio
+    shotcut
+    shotwell
+    vlc
+
+    go
+    rustc
+    nodejs_24
+
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
