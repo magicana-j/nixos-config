@@ -223,16 +223,18 @@
   environment.systemPackages = with pkgs; [
     vim git
     btop htop fastfetch
-　　 geany
+    geany
     google-chrome
   ];
 
   ## bash
   programs.bash = {
+	enable = true;
     completion.enable = true;
     shellAliases = {
-      nrs = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
-
+      la = "ls -a";
+      ll = "ls -al";
+      l = "ls -alF";
     };
   };
 

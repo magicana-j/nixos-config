@@ -10,28 +10,27 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations = {
-      hermes = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."hermes" = nixpkgs.lib.nixosSystem {
 #        specialArgs = {
 #          inherit inputs;
 #        };
-        system = "x86_64-linux";
+      system = "x86_64-linux";
 
-        modules = [
-          ./configuration.nix
+      modules = [
+        ./hosts/hermes/configuration.nix
+        ./hosts/hermes/apps.nix
 
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.amuharai = import ./home.nix;
-            };
-          }
+        home-manager.nixosModules.home-manager {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.amuharai = import ./hosts/hermes/home.nix;
+        };
+        }
 
-        ];
+      ];
 
-      };
-    };
+	  };
   };
 
 }

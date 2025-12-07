@@ -6,27 +6,11 @@
 
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
     home-manager
     neovim
-
-#    podman
-#    podman-compose
-#
-#    shotwell
-#    gimp
-#
-#    audacity
-#    handbrake
-#    obs-studio
-#    shotcut
-#    shotwell
-#    vlc
-#
-#    go
-#    rustc
-#    nodejs_24
-
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -42,18 +26,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  };
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    shellAliases = {
-      nrs = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
-      nrt = "sudo nixos-rebuild test --flake /etc/nixos#$(hostname)";
-      nrb = "sudo nixos-rebuild build --flake /etc/nixos#$(hostname)";
-      
-      hms = "home-manager switch --flake ~/dotfiles#amuharai";
-    };
   };
 
   home.sessionVariables = {
