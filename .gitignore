@@ -1,2 +1,3 @@
+./flake.lock
 ./hosts/hermes/hardware-configuration.nix
 
