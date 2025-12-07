@@ -10,7 +10,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations."hermes" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.hermes = nixpkgs.lib.nixosSystem {
 #        specialArgs = {
 #          inherit inputs;
 #        };

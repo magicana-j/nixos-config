@@ -9,6 +9,7 @@
     mako
     wofi fuzzel
     waybar
+    alacritty kitty foot
   ];
     
 }

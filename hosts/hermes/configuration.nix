@@ -235,6 +235,7 @@
       la = "ls -a";
       ll = "ls -al";
       l = "ls -alF";
+      nrsf = "sudo nixos-rebuild switch --flake";
     };
   };
 

@@ -6,7 +6,7 @@
 
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
-  nixpkgs.config.allowUnfree = true;
+#  nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     home-manager
