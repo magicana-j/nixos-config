@@ -3,13 +3,11 @@
 {
   imports = [
     ./hardware-configuration.nix
-#    ./profiles/kde.nix
+#    ./gaming.nix
     ./profiles/cinnamon.nix
-    ./profiles/waylandtools.nix
     ./profiles/sway.nix
     ./profiles/niri.nix
-#    ./profiles/hyprland.nix
-#    ./gaming.nix
+    ./profiles/hyprland.nix
   ];
 
   # Bootloader configuration
@@ -51,13 +49,6 @@
   # Networking configuration
   networking.hostName = "hermes";
   networking.networkmanager.enable = true;
-
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   services.tailscale.enable = true;
   networking.firewall = {
@@ -223,47 +214,11 @@
   environment.systemPackages = with pkgs; [
     vim git
     btop htop fastfetch
-    geany
-    google-chrome
   ];
-
-  ## bash
-  programs.bash = {
-	enable = true;
-    completion.enable = true;
-    shellAliases = {
-      la = "ls -a";
-      ll = "ls -al";
-      l = "ls -alF";
-      nrsf = "sudo nixos-rebuild switch --flake";
-    };
-  };
 
   ## Firefox
   programs.firefox.enable = true;
 
-  ## Direnv for project-specific environments
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  programs.git = {
-    enable = true;
-    config = {
-      usr = {
-        name = "amuharai";
-        email = "";
-      };
-      init = {
-        defaultBranch = "main";
-      };
-      url = {
-        "git@github.com:".insteadOf = "https://github.com/";
-        "ssh://git@github.com".insteadOf = "https://github.com";
-      };
-    };
-  };
 
   system.stateVersion = "25.11";
 }

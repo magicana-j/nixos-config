@@ -20,16 +20,16 @@
         ./hosts/hermes/configuration.nix
 
         home-manager.nixosModules.home-manager {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.amuharai = import ./hosts/hermes/home.nix;
-        };
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.amuharai = import ./hosts/hermes/home.nix;
+          };
         }
 
       ];
 
-	  };
+	};
   };
 
 }
