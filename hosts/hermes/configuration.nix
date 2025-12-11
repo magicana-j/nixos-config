@@ -110,6 +110,45 @@
     "i915.fastboot=1"
   ];
 
+  # System76 CPU スケジューラー
+  # CPUのスケジューリングを最適化し、電源状態に応じてプロファイルを自動調整します。
+  services.system76-scheduler = {
+    enable = true;
+    # CFS (Completely Fair Scheduler)プロファイルも有効にする
+    settings.cfsProfiles.enable = true;
+  };
+
+  # TLP (Linux Advanced Power Management)
+  # 詳細な電源管理を行います。
+  services.tlp = {
+    enable = true;
+    settings = {
+      # 電源接続時: CPUガバナーをパフォーマンスに設定
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      # バッテリー駆動時: CPUガバナーを省電力に設定
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      
+      # 例: CPUターボブーストをバッテリー駆動時に無効化する (さらなる省電力化)
+      # CPU_BOOST_ON_BAT = 0; 
+      
+      # 注: ここでは動画の内容に沿った基本的な設定のみを示しています。
+      # 必要に応じて、ディスク、USB、Wi-Fiなどの詳細設定を追加できます。
+    };
+  };
+
+  # Power Profiles Daemon (電源プロファイルデーモン) の無効化
+  # TLPを使用する場合、Gnomeなどの標準的な電源管理デーモンと競合するため、これを無効にする必要があります。
+  services.power-profiles-daemon.enable = false;
+
+  # Powertop (電力測定および最適化)
+  # 消費電力を測定し、システムの最適化を行うために使用します。
+  powerManagement.powertop.enable = true;
+
+  # thermald サービス (Intel CPU向け)
+  # Intel CPUの温度管理デーモンを有効にし、過熱を防ぎます。
+  # Intel製以外のCPUを使用している場合は不要です。
+  services.thermald.enable = true;
+
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHd";
   };
@@ -214,6 +253,7 @@
   environment.systemPackages = with pkgs; [
     vim git
     btop htop fastfetch
+    libfido2
   ];
 
   ## Firefox

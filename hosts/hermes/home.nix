@@ -1,22 +1,33 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  dotfilesDir = ../../dotfiles;
+  cfgDirs = [
+    "alacritty"
+    "fastfetch"
+    "foot"
+    "hypr"
+    "kitty"
+    "niri"
+    "nvim"
+    "sway"
+    "tmux"
+    "waybar"
+  ];
+in
 {
   home.username = "amuharai";
   home.homeDirectory = "/home/amuharai";
 
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
-#  nixpkgs.config.allowUnfree = true;
-
-#  imports = [
-#
-#  ];
   
   home.packages = with pkgs; [
     home-manager
     neovim
-
     geany
+
+    tmux
 
     swaybg
     swayidle
@@ -75,7 +86,7 @@
       init.defaultBranch = "main";
       url."git@github.com:".insteadOf = "https://github.com/";
       url."ssh://git@github.com".insteadOf = "https://github.com";
-	};
+    };
     #config = {
       #usr = {
         #name = "magicana-j";
@@ -90,6 +101,13 @@
       #};
     #};
   };
+
+  xdg.enable = true;
+  xdg.configFile = lib.genAttrs cfgDirs (name: {
+    target = ".config/${name}";
+    source = "${dotfilesDir}/config/${name}";
+    recursive = true;
+  });
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
