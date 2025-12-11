@@ -102,12 +102,6 @@ in
     #};
   };
 
-  xdg.enable = true;
-  xdg.configFile = lib.genAttrs cfgDirs (name: {
-    target = ".config/${name}";
-    source = "${dotfilesDir}/config/${name}";
-    recursive = true;
-  });
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -122,7 +116,16 @@ in
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  };
+
+    ".vim" = {
+      source = "${dotfilesDir}/.vim";
+      recursive = true;
+    };
+  } // lib.genAttrs cfgDirs (name: {
+    target = ".config/${name}";
+    source = "${dotfilesDir}/config/${name}";
+    recursive = true;
+  });
 
   home.sessionVariables = {
     # EDITOR = "emacs";
