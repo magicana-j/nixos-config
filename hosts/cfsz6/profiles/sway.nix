@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  programs.sway = {
+  wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
   };    

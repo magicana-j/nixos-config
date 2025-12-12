@@ -3,11 +3,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-#    ./gaming.nix
+    ./gaming.nix
     ./profiles/cinnamon.nix
-    ./profiles/sway.nix
-    ./profiles/niri.nix
-    ./profiles/hyprland.nix
   ];
 
   # Bootloader configuration
@@ -47,7 +44,7 @@
   # services.xserver.libinput.enable = true;
 
   # Networking configuration
-  networking.hostName = "hermes";
+  networking.hostName = "cfsz6";
   networking.networkmanager.enable = true;
 
   services.tailscale.enable = true;

@@ -9,27 +9,27 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.hermes = nixpkgs.lib.nixosSystem {
-#        specialArgs = {
-#          inherit inputs;
-#        };
-      system = "x86_64-linux";
-
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  let
+    hostname = "cfsz6";
+    system = "x86_64-linux";
+  in {
+    nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+      inherit system;
       modules = [
-        ./hosts/hermes/configuration.nix
+        ./hosts/${hostname}/configuration.nix
 
         home-manager.nixosModules.home-manager {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.amuharai = import ./hosts/hermes/home.nix;
+            users.amuharai = import ./hosts/${hostname}/home.nix;
           };
         }
 
       ];
 
-	};
+	  };
   };
 
 }
