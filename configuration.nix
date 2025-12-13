@@ -1,4 +1,4 @@
-{ config, pkgs, lib, username, hostname, gpuType, userConfig, ... }:
+{ config, pkgs, lib, myName, myHostname, gpuType, userConfig, ... }:
 
 {
   imports = [
@@ -47,7 +47,7 @@
   # services.xserver.libinput.enable = true;
 
   # Networking configuration
-  networking.hostName = hostname;
+  networking.hostName = myHostname;
   networking.networkmanager.enable = true;
 
   services.tailscale.enable = true;
@@ -78,7 +78,7 @@
       ];
 
       # 一般ユーザーが追加のsubstituterを使えるようにしたい場合だけ
-      trusted-users = [ "root" username ];
+      trusted-users = [ "root" myName ];
     };
 
     # Automatic garbage collection
@@ -106,10 +106,10 @@
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       # バッテリー駆動時: CPUガバナーを省電力に設定
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      
+
       # 例: CPUターボブーストをバッテリー駆動時に無効化する (さらなる省電力化)
-      # CPU_BOOST_ON_BAT = 0; 
-      
+      # CPU_BOOST_ON_BAT = 0;
+
       # 注: ここでは動画の内容に沿った基本的な設定のみを示しています。
       # 必要に応じて、ディスク、USB、Wi-Fiなどの詳細設定を追加できます。
     };
@@ -154,15 +154,17 @@
       source-code-pro
       #nerdfetch
       udev-gothic-nf
+      hackgen-font
+      hackgen-nf-font
     ];
 
     fontDir.enable = true;
-    
+
     fontconfig = {
       defaultFonts = {
-        serif = ["Noto Serif CJK JP" "Takao PMincho" "IPA PMincho" "Noto Color Emoji"];
-        sansSerif = ["Noto Sans CJK JP" "Takao PGothic" "IPA PGothic" "Noto Color Emoji"];
-        monospace = ["Noto Sans Mono CJK JP" "Takao Gothic" "IPA Gothic" "Noto Color Emoji"];
+#        serif = ["Noto Serif CJK JP" "Noto Color Emoji"];
+#        sansSerif = ["Noto Sans CJK JP" "Noto Color Emoji"];
+        monospace = ["HackGen35 Console NF" "Noto Sans Mono CJK JP" "Noto Color Emoji"];
         emoji = ["Noto Color Emoji"];
       };
     };
@@ -203,9 +205,9 @@
   };
 
   # User account configuration
-  users.users.${username} = {
+  users.users.${myName} = {
     isNormalUser = true;
-    description = userConfig.userFullname;
+    description = userConfig.userFullName;
     extraGroups = [
       "networkmanager"
       "wheel"
