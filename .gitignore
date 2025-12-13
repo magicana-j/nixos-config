@@ -1,3 +1,15 @@
-./flake.lock
-./hosts/hermes/hardware-configuration.nix
+# ユーザー固有の設定ファイル
+user-config.nix
 
+# ハードウェア固有の設定
+hardware-configuration.nix
+
+# Flakeのロックファイル（任意）
+flake.lock
+
+# 一時ファイル
+result
+result-*
+*.swp
+*.swo
+*~

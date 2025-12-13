@@ -1,5 +1,5 @@
 {
-  description = "NixOS + home-manager configs";
+  description = "NixOS + flakes + home-manager configs";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -11,19 +11,33 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
-    hostname = "cfsz6";
-    system = "x86_64-linux";
+    userConfigPath = 
+      if builtins.pathExists ./user-config.nix
+      then ./user-config.nix
+      else ./user-config.example;
+      
+    userConfig = import userConfigPath;
+    
+    inherit (userConfig) system username hostname gpuType;
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       inherit system;
+      specialArgs = {
+        inherit username hostname gpuType;
+        inherit userConfig;
+      };
+      
       modules = [
-        ./hosts/${hostname}/configuration.nix
+        ./configuration.nix
 
         home-manager.nixosModules.home-manager {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.amuharai = import ./hosts/${hostname}/home.nix;
+            users.${username} = import ./home.nix;
+            extraSpecialArgs = {
+              inherit username userConfig;
+            };
           };
         }
 

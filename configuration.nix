@@ -1,10 +1,13 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, username, hostname, gpuType, userConfig, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./gaming.nix
     ./profiles/cinnamon.nix
+    (if gpuType == "intel" then ./gpu/intel.nix
+    else if gpuType == "amd" then ./gpu/amd.nix
+    else throw)
   ];
 
   # Bootloader configuration
@@ -44,7 +47,7 @@
   # services.xserver.libinput.enable = true;
 
   # Networking configuration
-  networking.hostName = "cfsz6";
+  networking.hostName = hostname;
   networking.networkmanager.enable = true;
 
   services.tailscale.enable = true;
@@ -75,7 +78,7 @@
       ];
 
       # 一般ユーザーが追加のsubstituterを使えるようにしたい場合だけ
-      trusted-users = [ "root" "amuharai" ];
+      trusted-users = [ "root" username ];
     };
 
     # Automatic garbage collection
@@ -85,27 +88,6 @@
       options = "--delete-older-than 7d";
     };
   };
-
-  # Intel Graphics最適化
-  boot.initrd.kernelModules = [ "i915" ];
-  services.xserver.videoDrivers = [ "modesetting" ];
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      intel-compute-runtime
-      vulkan-loader
-      vulkan-validation-layers
-      intel-vaapi-driver
-    ];
-  };
-
-  boot.kernelParams = [
-    "i915.enable_guc=3"
-    "i915.enable_fbc=1"
-    "i915.fastboot=1"
-  ];
 
   # System76 CPU スケジューラー
   # CPUのスケジューリングを最適化し、電源状態に応じてプロファイルを自動調整します。
@@ -140,15 +122,6 @@
   # Powertop (電力測定および最適化)
   # 消費電力を測定し、システムの最適化を行うために使用します。
   powerManagement.powertop.enable = true;
-
-  # thermald サービス (Intel CPU向け)
-  # Intel CPUの温度管理デーモンを有効にし、過熱を防ぎます。
-  # Intel製以外のCPUを使用している場合は不要です。
-  services.thermald.enable = true;
-
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHd";
-  };
 
   # zramで実メモリを稼ぐ
   zramSwap = {
@@ -196,30 +169,30 @@
   };
 
   # Time zone
-  time.timeZone = "Asia/Tokyo";
+  time.timeZone = userConfig.timeZone;
 
   # Localization
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = userConfig.locale;
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "ja_JP.UTF-8";
-    LC_IDENTIFICATION = "ja_JP.UTF-8";
-    LC_MEASUREMENT = "ja_JP.UTF-8";
-    LC_MONETARY = "ja_JP.UTF-8";
-    LC_NAME = "ja_JP.UTF-8";
-    LC_NUMERIC = "ja_JP.UTF-8";
-    LC_PAPER = "ja_JP.UTF-8";
-    LC_TELEPHONE = "ja_JP.UTF-8";
-    LC_TIME = "ja_JP.UTF-8";
+    LC_ADDRESS = userConfig.extralocale;
+    LC_IDENTIFICATION = userConfig.extralocale;
+    LC_MEASUREMENT = userConfig.extralocale;
+    LC_MONETARY = userConfig.extralocale;
+    LC_NAME = userConfig.extralocale;
+    LC_NUMERIC = userConfig.extralocale;
+    LC_PAPER = userConfig.extralocale;
+    LC_TELEPHONE = userConfig.extralocale;
+    LC_TIME = userConfig.extralocale;
   };
 
   # Keyboard layout
   services.xserver.xkb = {
-    layout = "jp";
+    layout = userConfig.xkblayout;
     variant = "";
   };
 
-  console.keyMap = "jp106";
+  console.keyMap = userConfig.keymap;
 
   # Input method (Fcitx5 with Mozc for Japanese)
   i18n.inputMethod = {
@@ -230,9 +203,9 @@
   };
 
   # User account configuration
-  users.users.amuharai = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Amuharai";
+    description = userConfig.userFullname;
     extraGroups = [
       "networkmanager"
       "wheel"

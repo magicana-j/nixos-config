@@ -1,7 +1,7 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, hostname, userConfig, ... }:
 
 let
-  dotfilesDir = ../../dotfiles;
+  dotfilesDir = ./dotfiles;
   cfgDirs = [
     "alacritty"
     "fastfetch"
@@ -16,10 +16,8 @@ let
   ];
 in
 {
-  home.username = "amuharai";
-  home.homeDirectory = "/home/amuharai";
-
-  home.stateVersion = "25.11"; # Please read the comment before changing.
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   imports = [
     ./profiles/sway.nix
@@ -73,7 +71,7 @@ in
       la = "ls -a";
       ll = "ls -al";
       l = "ls -alF";
-      nrsf = "sudo nixos-rebuild switch --flake";
+      nrsf = "sudo nixos-rebuild switch --flake .#${hostname}";
     };
   };
 
@@ -86,40 +84,11 @@ in
   programs.git = {
     enable = true;
     settings = {
-      user.name = "magicana-j";
-      user.email = "";
       init.defaultBranch = "main";
       url."git@github.com:".insteadOf = "https://github.com/";
       url."ssh://git@github.com".insteadOf = "https://github.com";
     };
-    #config = {
-      #usr = {
-        #name = "magicana-j";
-        #email = "";
-      #};
-      #init = {
-        #defaultBranch = "main";
-      #};
-      #url = {
-        #"git@github.com:".insteadOf = "https://github.com/";
-        #"ssh://git@github.com".insteadOf = "https://github.com";
-      #};
-    #};
-  };
 
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-  # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-  # # symlink to the Nix store copy.
-  # ".screenrc".source = dotfiles/screenrc;
-
-  # # You can also set the file content immediately.
-  # ".gradle/gradle.properties".text = ''
-  #   org.gradle.console=verbose
-  #   org.gradle.daemon.idletimeout=3600000
-  # '';
   home.file = {
     ".vim" = {
       source = "${dotfilesDir}/.vim";
@@ -132,8 +101,10 @@ in
   });
 
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "vim";
   };
 
   programs.home-manager.enable = true;
+
+  home.stateVersion = "25.11"; # Please read the comment before changing.
 }
