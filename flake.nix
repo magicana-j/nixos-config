@@ -11,10 +11,13 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
-    userConfigPath = 
-      if builtins.pathExists ./user-config.nix
-      then ./user-config.nix
-      else ./user-config.example;
+    userConfigPath =
+      let
+        customConfig = self.outPath + "/user-config.nix";
+        exampleConfig = self.outPath + "/user-config.nix.example";
+      if builtins.pathExists customConfig
+      then customConfig
+      else exampleConfig;
       
     userConfig = import userConfigPath;
     
