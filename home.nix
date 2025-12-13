@@ -21,6 +21,7 @@ in
 
   imports = [
     ./profiles/sway.nix
+    ./git.nix
   ];
   
   home.packages = with pkgs; [
