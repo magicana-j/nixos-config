@@ -5,11 +5,14 @@
     enable = true;
 
     settings = {
-      user.name = "magicana-j";
-      user.email = "";
+      user.name = "Taro Yamada";
+      user.email = "taro@example.com";
       init.defaultBranch = "main";
-      url."git@github.com:".insteadOf = "https://github.com/";
-      url."ssh://git@github.com".insteadOf = "https://github.com";
+      
+      # Access Github through SSH
+      # Uncomment the following two lines when you want to enable
+#      url."git@github.com:".insteadOf = "https://github.com/";
+#      url."ssh://git@github.com".insteadOf = "https://github.com";
     };
   };
 
