@@ -1,5 +1,6 @@
 # ユーザー固有の設定ファイル
 user-config.nix
+git.nix
 
 # ハードウェア固有の設定
 hardware-configuration.nix
