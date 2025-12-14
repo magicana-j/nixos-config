@@ -22,12 +22,12 @@
       
     userConfig = import userConfigPath;
     
-    inherit (userConfig) system username hostname gpuType;
+    inherit (userConfig) system myName myHostname gpuType;
   in {
-    nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.${myHostname} = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        inherit username hostname gpuType;
+        inherit myName myHostname gpuType;
         inherit userConfig;
       };
       
@@ -38,9 +38,9 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.${username} = import ./home.nix;
+            users.${myName} = import ./home.nix;
             extraSpecialArgs = {
-              inherit username userConfig;
+              inherit myName userConfig;
             };
           };
         }

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, username, hostname, userConfig, ... }:
+{ config, pkgs, lib, myName, myHostname, userConfig, ... }:
 
 let
   dotfilesDir = ./dotfiles;
@@ -16,8 +16,8 @@ let
   ];
 in
 {
-  home.username = username;
-  home.homeDirectory = "/home/${username}";
+  home.username = myName;
+  home.homeDirectory = "/home/${myName}";
 
   imports = [
     ./profiles/sway.nix
@@ -72,7 +72,7 @@ in
       la = "ls -a";
       ll = "ls -al";
       l = "ls -alF";
-      nrsf = "sudo nixos-rebuild switch --flake .#${hostname}";
+      nrsf = "sudo nixos-rebuild switch --flake .#$(hostname)";
     };
   };
 
@@ -81,14 +81,6 @@ in
     enable = true;
     nix-direnv.enable = true;
   };
-
-  programs.git = {
-    enable = true;
-    settings = {
-      init.defaultBranch = "main";
-      url."git@github.com:".insteadOf = "https://github.com/";
-      url."ssh://git@github.com".insteadOf = "https://github.com";
-    };
 
   home.file = {
     ".vim" = {

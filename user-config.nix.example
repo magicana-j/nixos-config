@@ -19,10 +19,10 @@
   system = "x86_64-linux";
 
   # ユーザー名（小文字の英数字とハイフン、アンダースコアのみ）
-  username = "myuser";
+  myName = "myuser";
 
   # ホスト名（小文字の英数字とハイフン、アンダースコアのみ）
-  hostname = "mynixos";
+  myHostname = "mynixos";
 
   # GPU種類: "intel" または "amd"
   gpuType = "intel";

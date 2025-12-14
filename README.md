@@ -6,8 +6,16 @@
 
 リポジトリをクローンして、すぐに試すことができます：
 ```bash
-git clone https://github.com/yourusername/nixos-config.git /etc/nixos
-cd /etc/nixos
+git clone https://github.com/yourusername/nixos-config.git ~/
+cd ~/nixos-config
+```
+
+```bash
+./install.sh
+cd ../nixos
+```
+
+```bash
 sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix
 sudo nixos-rebuild switch --flake .#mynixos
 ```
