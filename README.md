@@ -34,18 +34,21 @@ cd /etc/nixos
 #### 2. ユーザー設定ファイルの作成
 ```bash
 cp user-config.nix.example user-config.nix
+cp git.nix.example git.nix
 ```
 
 #### 3. 設定ファイルの編集
 
 `user-config.nix`を編集して、自分の環境に合わせて設定します：
 ```bash
-vim user-config.nix
+nano user-config.nix
+
+nano git.nix
 ```
 
 必須の設定項目：
-- `username`: ユーザー名
-- `hostname`: ホスト名
+- `myName`: ユーザー名
+- `myHostname`: ホスト名
 - `gpuType`: GPUの種類（"intel" または "amd"）
 - `userFullName`: フルネーム（Gitなどで使用）
 - `userEmail`: メールアドレス
@@ -62,6 +65,9 @@ sudo nixos-rebuild switch --flake .#あなたのホスト名
 
 # または、サンプル設定のデフォルトホスト名(mynixos)を使用する場合
 sudo nixos-rebuild switch --flake .#mynixos
+
+# 一度セットアップが成功したあとは次のコマンドでリビルドできます。
+nsrf
 ```
 
 ## 設定ファイルについて
@@ -79,15 +85,18 @@ sudo nixos-rebuild switch --flake .#mynixos
 
 ## GPU設定の変更
 
+~~
 `user-config.nix`の`gpuType`を変更して、再度適用してください：
 ```nix
 gpuType = "amd";  # Intel から AMD に変更する場合
 ```
+~~
 
 ## ファイル管理
 
 Git管理されないファイル：
 - `user-config.nix` - 個人設定（各自で作成）
+-  git.nix 個人のgit設定（各自で作成）
 - `hardware-configuration.nix` - ハードウェア固有設定（各自で生成）
 
 Git管理されるファイル：
