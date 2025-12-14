@@ -10,6 +10,17 @@
     else throw)
   ];
 
+  # user-config.nixが存在しない場合の警告
+  warnings = lib.optionals (!builtins.pathExists /etc/nixos/user-config.nix) [
+    ''
+      警告: user-config.nix が見つかりません。
+      user-config.nix.example をコピーして、自分の環境に合わせて編集してください：
+        cd /etc/nixos
+        cp user-config.nix.example user-config.nix
+        vim user-config.nix
+    ''
+  ];
+
   # Bootloader configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
