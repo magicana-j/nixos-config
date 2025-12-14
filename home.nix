@@ -30,6 +30,7 @@ in
     home-manager
     neovim
     geany
+    gparted
 
     tmux
 
