@@ -92,7 +92,6 @@ nsrf
 ```nix
 gpuType = "amd";  # Intel から AMD に変更する場合
 ```
-~~
 
 ## ファイル管理
 
