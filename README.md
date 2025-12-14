@@ -85,8 +85,8 @@ nsrf
 
 ## GPU設定の変更
 
-~~
-`user-config.nix`の`gpuType`を変更して、再度適用してください：
+~~`user-config.nix`の`gpuType`を変更して、再度適用してください：~~
+現在AMD-GPUの設定によるビルド結果は未確認です。
 ```nix
 gpuType = "amd";  # Intel から AMD に変更する場合
 ```
