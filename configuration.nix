@@ -3,8 +3,10 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./gaming.nix
     ./profiles/cinnamon.nix
+
+    # ゲーム用モジュールは一度セットアップしてから組み込む
+#    ./gaming.nix
   ];
 
   # user-config.nixが存在しない場合の警告
@@ -82,12 +84,14 @@
         # "https://cache.nixos.org"
         "https://nix-community.cachix.org"
         # 必要なら他のCachixを追加
+
       ];
 
       trusted-public-keys = [
         # "cache.nixos.org-1:【公式キー】"
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         # 追加した各キャッシュの公開鍵を列挙
+
       ];
 
       # 一般ユーザーが追加のsubstituterを使えるようにしたい場合だけ
@@ -152,7 +156,7 @@
   # LUKSのdiscard許可（cryptroot 名は各自の構成に合わせて変更）
   # boot.initrd.luks.devices."cryptroot".allowDiscards = true;
 
-  # Font configuration
+  # フォント設定
   fonts = {
     packages = with pkgs; [
       noto-fonts
@@ -183,10 +187,10 @@
     };
   };
 
-  # Time zone
+  # タイムゾーン
   time.timeZone = userConfig.timeZone;
 
-  # Localization
+  # ロケール
   i18n.defaultLocale = userConfig.locale;
 
   i18n.extraLocaleSettings = {
@@ -201,7 +205,7 @@
     LC_TIME = userConfig.extralocale;
   };
 
-  # Keyboard layout
+  # キーボード配列
   services.xserver.xkb = {
     layout = userConfig.xkblayout;
     variant = "";
@@ -217,7 +221,7 @@
     fcitx5.waylandFrontend = true;
   };
 
-  # User account configuration
+  # ユーザーアカウント設定
   users.users.${myName} = {
     isNormalUser = true;
     description = userConfig.userFullName;
@@ -234,7 +238,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # System packages
+  # システムパッケージ
   environment.systemPackages = with pkgs; [
     vim git
     btop htop fastfetch
