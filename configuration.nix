@@ -244,7 +244,6 @@
     vim git curl wget
     btop htop fastfetch
     libfido2
-    niri
   ];
 
   ## Firefox
