@@ -24,9 +24,6 @@
   # ホスト名（小文字の英数字とハイフン、アンダースコアのみ）
   myHostname = "mynixos";
 
-  # GPU種類: "intel" または "amd"
-  gpuType = "intel";
-
   # ユーザー情報（Home Manager用）
   userFullName = "Your Name";
   userEmail = "your.email@example.com";
