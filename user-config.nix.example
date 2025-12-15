@@ -35,7 +35,7 @@
   timeZone = "Asia/Tokyo";
 
   # ロケール
-  locale = "en_US.UTF-8";
+  locale = "ja_JP.UTF-8";
   extralocale = "ja_JP.UTF-8";
   xkblayout = "jp";
   keymap = "jp106";
