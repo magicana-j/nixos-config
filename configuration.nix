@@ -1,13 +1,10 @@
-{ config, pkgs, lib, myName, myHostname, gpuType, userConfig, ... }:
+{ config, pkgs, lib, myName, myHostname, userConfig, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./gaming.nix
     ./profiles/cinnamon.nix
-    (if gpuType == "intel" then ./gpu/intel.nix
-    else if gpuType == "amd" then ./gpu/amd.nix
-    else throw)
   ];
 
   # user-config.nixが存在しない場合の警告
@@ -241,7 +238,6 @@
 
   ## Firefox
   programs.firefox.enable = true;
-
 
   system.stateVersion = "25.11";
 }
