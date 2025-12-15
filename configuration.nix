@@ -241,9 +241,10 @@
 
   # システムパッケージ
   environment.systemPackages = with pkgs; [
-    vim git
+    vim git curl wget
     btop htop fastfetch
     libfido2
+    niri
   ];
 
   ## Firefox
