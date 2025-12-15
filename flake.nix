@@ -22,12 +22,12 @@
       
     userConfig = import userConfigPath;
     
-    inherit (userConfig) system myName myHostname gpuType;
+    inherit (userConfig) system myName myHostname;
   in {
     nixosConfigurations.${myHostname} = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        inherit myName myHostname gpuType;
+        inherit myName myHostname;
         inherit userConfig;
       };
       
