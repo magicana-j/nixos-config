@@ -27,8 +27,7 @@
     nixosConfigurations.${myHostname} = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        inherit myName myHostname;
-        inherit userConfig;
+        inherit myName myHostname userConfig;
       };
       
       modules = [
