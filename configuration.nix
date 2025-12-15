@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./profiles/cinnamon.nix
+    ./profiles/sway.nix
 
     # ゲーム用モジュールは一度セットアップしてから組み込む
 #    ./gaming.nix
