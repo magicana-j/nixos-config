@@ -18,7 +18,7 @@
   ];
 
   # user-config.nixが存在しない場合の警告
-  warnings = lib.optionals (!builtins.pathExists /etc/nixos/user-config.nix) [
+  warnings = lib.optionals (!builtins.pathExists ./user-config.nix) [
     ''
       Warning: user-config.nix does not exists.
       Copy user-config.nix.example and modify according to your environment:
