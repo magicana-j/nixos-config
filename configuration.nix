@@ -172,25 +172,30 @@
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
       liberation_ttf
-      fira-code
-      fira-code-symbols
-      mplus-outline-fonts.githubRelease
-      dina-font
-      proggyfonts
       source-code-pro
-      #nerdfetch
-      udev-gothic-nf
-      hackgen-font
-      hackgen-nf-font
+
+      fira-code fira-code-symbols
+      jetbrains-mono
+      nerd-fonts.jetbrains-mono
+#      dina-font
+#      proggyfonts
+#      nerdfetch
+
+      mplus-outline-fonts.githubRelease
+      udev-gothic udev-gothic-nf
+      hackgen-font hackgen-nf-font
+      explex explex-nf
+      plemoljp plemoljp-nf plemoljp-hs
+      moralerspace moralerspace-hw
     ];
 
     fontDir.enable = true;
 
     fontconfig = {
       defaultFonts = {
-#        serif = ["Noto Serif CJK JP" "Noto Color Emoji"];
-#        sansSerif = ["Noto Sans CJK JP" "Noto Color Emoji"];
-        monospace = ["HackGen35 Console NF" "Noto Sans Mono CJK JP" "Noto Color Emoji"];
+        serif = ["Noto Serif CJK JP" "Noto Color Emoji"];
+        sansSerif = ["Noto Sans CJK JP" "Noto Color Emoji"];
+        monospace = ["HackGen" "Noto Sans Mono CJK JP" "Noto Color Emoji"];
         emoji = ["Noto Color Emoji"];
       };
     };
