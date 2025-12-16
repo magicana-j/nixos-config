@@ -1,4 +1,4 @@
-# NixOS Configuration
+# NixOS & flakes, home-manager環境構築
 
 ## セットアップ手順
 
