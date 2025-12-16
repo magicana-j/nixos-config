@@ -49,7 +49,6 @@ nano git.nix
 必須の設定項目：
 - `myName`: ユーザー名
 - `myHostname`: ホスト名
-- `gpuType`: GPUの種類（"intel" または "amd"）
 - `userFullName`: フルネーム（Gitなどで使用）
 - `userEmail`: メールアドレス
 
@@ -82,16 +81,6 @@ nsrf
 1. **初回テスト**: サンプル設定でシステムが動作することを確認
 2. **カスタマイズ**: `user-config.nix`を作成して自分の環境に合わせる
 3. **本番運用**: カスタマイズした設定で運用
-
-## GPU設定の変更
-
-~~`user-config.nix`の`gpuType`を変更して、再度適用してください：~~
-
-現在AMD-GPUの設定によるビルド結果は未確認です。
-
-```nix
-gpuType = "amd";  # Intel から AMD に変更する場合
-```
 
 ## ファイル管理
 
