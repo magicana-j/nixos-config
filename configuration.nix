@@ -7,7 +7,10 @@
     # デスクトップ環境はお好みで選択
     ./profiles/cinnamon.nix
 #    ./profiles/xfce4.nix
+
 #    ./profiles/kde.nix
+
+    # Waylandコンポジタを使う場合は、上記デスクトップ環境のいずれかも選択してください
     ./profiles/sway.nix
     ./profiles/niri.nix
 
