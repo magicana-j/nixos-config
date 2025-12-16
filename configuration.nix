@@ -12,7 +12,6 @@
 
     # Waylandコンポジタを使う場合は、上記デスクトップ環境のいずれかも選択してください
     ./profiles/sway.nix
-    ./profiles/niri.nix
 
     # ゲーム用モジュールは一度セットアップしてから組み込む
 #    ./gaming.nix
