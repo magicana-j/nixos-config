@@ -6,13 +6,9 @@ let
     "alacritty"
     "fastfetch"
     "foot"
-    "hypr"
     "kitty"
-    "niri"
     "nvim"
-    "sway"
     "tmux"
-    "waybar"
   ];
 in
 {
@@ -29,6 +25,7 @@ in
     neovim
     geany
     gparted
+    stow
 
     tmux
     
