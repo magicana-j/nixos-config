@@ -4,7 +4,8 @@
     "height": 30,
 
     "modules-left": [
-        "clock"
+        "clock",
+        "sway/workspaces"
     ],
 
     "modules-center": [
@@ -36,6 +37,17 @@
                 "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
                 "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
             }
+        }
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": false,
+        "format": "{name}",
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": []
         }
     },
 
