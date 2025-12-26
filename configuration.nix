@@ -5,8 +5,8 @@
     ./hardware-configuration.nix
 
     # デスクトップ環境はお好みで選択
-    ./profiles/cinnamon.nix
-#    ./profiles/xfce4.nix
+#    ./profiles/cinnamon.nix
+    ./profiles/xfce4.nix
 
 #    ./profiles/kde.nix
 
