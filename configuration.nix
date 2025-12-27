@@ -258,6 +258,8 @@
     libfido2
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [ "ventoy-full" ];
+
   ## Firefox
   programs.firefox.enable = true;
 
