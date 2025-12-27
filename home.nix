@@ -58,6 +58,8 @@ in
     rustc
     nodejs_24
 
+    ventoy-full
+
   ];
 
   ## bash
