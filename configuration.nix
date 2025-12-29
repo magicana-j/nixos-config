@@ -4,15 +4,6 @@
   imports = [
     ./hardware-configuration.nix
 
-    # デスクトップ環境はお好みで選択
-#    ./profiles/cinnamon.nix
-    ./profiles/xfce4.nix
-
-#    ./profiles/kde.nix
-
-    # Waylandコンポジタを使う場合は、上記デスクトップ環境のいずれかも選択してください
-    ./profiles/sway.nix
-
     # ゲーム用モジュールは一度セットアップしてから組み込む
 #    ./gaming.nix
   ];
@@ -32,6 +23,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+
+  services.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
 
   programs.xwayland.enable = true;
 
