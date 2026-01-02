@@ -80,12 +80,12 @@
   networking.hostName = myHostname;
   networking.networkmanager.enable = true;
 
-  services.tailscale.enable = true;
   networking.firewall = {
     enable = true;
-    trustedInterfaces = ["tailscale0"];
+#    trustedInterfaces = ["tailscale0"];
     allowedUDPPorts = [];
   };
+
 
   # Nix package manager settings
   nix = {
