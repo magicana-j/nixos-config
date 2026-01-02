@@ -9,3 +9,4 @@ rsync -av \
 	--exclude='flake.lock' \
 	~/nixos-config/ ~/nixos/
 
+sudo nixos-generate-config --show-hardware-config > ~/nixos/hardware-configuration.nix
