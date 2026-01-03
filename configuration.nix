@@ -151,6 +151,8 @@
   # TLPを使用する場合、Gnomeなどの標準的な電源管理デーモンと競合するため、これを無効にする必要があります。
   services.power-profiles-daemon.enable = false;
 
+  services.thermald.enable;
+
   # Powertop (電力測定および最適化)
   # 消費電力を測定し、システムの最適化を行うために使用します。
   powerManagement.powertop.enable = true;
