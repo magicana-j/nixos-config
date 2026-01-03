@@ -129,28 +129,6 @@
     settings.cfsProfiles.enable = true;
   };
 
-  # TLP (Linux Advanced Power Management)
-  # 詳細な電源管理を行います。
-  services.tlp = {
-    enable = true;
-    settings = {
-      # 電源接続時: CPUガバナーをパフォーマンスに設定
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      # バッテリー駆動時: CPUガバナーを省電力に設定
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      # 例: CPUターボブーストをバッテリー駆動時に無効化する (さらなる省電力化)
-      # CPU_BOOST_ON_BAT = 0;
-
-      # 注: ここでは動画の内容に沿った基本的な設定のみを示しています。
-      # 必要に応じて、ディスク、USB、Wi-Fiなどの詳細設定を追加できます。
-    };
-  };
-
-  # Power Profiles Daemon (電源プロファイルデーモン) の無効化
-  # TLPを使用する場合、Gnomeなどの標準的な電源管理デーモンと競合するため、これを無効にする必要があります。
-  services.power-profiles-daemon.enable = false;
-
   services.thermald.enable;
 
   # Powertop (電力測定および最適化)
@@ -177,10 +155,10 @@
   fonts = {
     packages = with pkgs; [
       noto-fonts
-      noto-fonts-cjk-sans
+#      noto-fonts-cjk-sans
       noto-fonts-color-emoji
       liberation_ttf
-      source-code-pro
+#      source-code-pro
 
       fira-code fira-code-symbols
       jetbrains-mono
@@ -201,8 +179,8 @@
 
     fontconfig = {
       defaultFonts = {
-        serif = ["Noto Serif CJK JP" "Noto Color Emoji"];
-        sansSerif = ["Noto Sans CJK JP" "Noto Color Emoji"];
+#        serif = ["Noto Serif CJK JP" "Noto Color Emoji"];
+#        sansSerif = ["Noto Sans CJK JP" "Noto Color Emoji"];
         monospace = ["HackGen" "Noto Sans Mono CJK JP" "Noto Color Emoji"];
         emoji = ["Noto Color Emoji"];
       };
