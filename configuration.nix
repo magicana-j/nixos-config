@@ -131,7 +131,7 @@
     settings.cfsProfiles.enable = true;
   };
 
-  services.thermald.enable;
+  services.thermald.enable =true;
 
   # Powertop (電力測定および最適化)
   # 消費電力を測定し、システムの最適化を行うために使用します。
