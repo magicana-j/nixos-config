@@ -39,6 +39,7 @@ in
     mako
     wofi fuzzel
     waybar
+    wlogout
     alacritty kitty foot
 
     google-chrome
