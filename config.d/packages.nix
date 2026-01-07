@@ -30,6 +30,6 @@
   programs.firefox.enable = true;
 
   # （Ventoy用）InsecurePackagesを許可  
-  nixpkgs.config.permittedInsecurePackages = [ "ventoy-full" ];
+#  nixpkgs.config.permittedInsecurePackages = [ "ventoy-full-gtk-1.1.07" ];
 
 }
