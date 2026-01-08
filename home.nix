@@ -7,6 +7,7 @@ let
     "fastfetch"
     "foot"
     "kitty"
+    "ghostty"
     "nvim"
     "tmux"
   ];
@@ -17,7 +18,7 @@ in
 
   imports = [
     # git設定ファイル(git.nix)を作成してから次の行のコメントを解除
-#    ./git.nix
+    ./git.nix
   ];
   
   home.packages = with pkgs; [
@@ -34,13 +35,11 @@ in
     swaybg
     swayidle
     swaylock
-    hyprpaper
     grim slurp
     mako
     wofi fuzzel
-    waybar
-    wlogout
     alacritty kitty foot
+    autotiling
 
     google-chrome
 
@@ -56,10 +55,6 @@ in
     shotcut
     shotwell
     vlc
-
-    go
-    rustc
-    nodejs_24
 
   ];
 
@@ -93,7 +88,7 @@ in
   });
 
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
   };
 
   programs.home-manager.enable = true;

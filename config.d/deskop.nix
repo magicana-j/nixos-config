@@ -14,19 +14,6 @@
   # Xwaylandを有効化 (X11アプリをWayland上で動かすための互換レイヤー)
   programs.xwayland.enable = true;
 
-  # Swayウィンドウマネージャー (Wayland用タイル型WM)
-  programs.sway = {
-    enable = true;
-    # GTKテーマの適用を有効化
-    wrapperFeatures.gtk = true;
-  };
-
-  # Waybar (Wayland用のステータスバー)
-  programs.waybar.enable = true;
-
-  # Niri (Wayland用のスクロール型タイリングウィンドウマネージャー)
-  programs.niri.enable = true;
-
   # タッチパッドサポート (ほとんどのデスクトップ環境でデフォルト有効)
   # services.xserver.libinput.enable = true;
 
