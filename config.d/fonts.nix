@@ -18,17 +18,18 @@
       
       # 日本語プログラミングフォント
       mplus-outline-fonts.githubRelease  # M+ Outline
+      biz-ud-gothic
       udev-gothic                   # UDEVゴシック
       udev-gothic-nf                # UDEVゴシック Nerd Fonts版
       hackgen-font                  # 白源/HackGen
       hackgen-nf-font               # 白源 Nerd Fonts版
-      explex                        # EXPLEX (IBM Plex Mono改)
-      explex-nf                     # EXPLEX Nerd Fonts版
-      plemoljp                      # PlemolJP (IBM Plex Mono改)
-      plemoljp-nf                   # PlemolJP Nerd Fonts版
-      plemoljp-hs                   # PlemolJP Half-Size版
-      moralerspace                  # Moralerspace
-      moralerspace-hw               # Moralerspace Half-Width版
+#      explex                        # EXPLEX (IBM Plex Mono改)
+#      explex-nf                     # EXPLEX Nerd Fonts版
+#      plemoljp                      # PlemolJP (IBM Plex Mono改)
+#      plemoljp-nf                   # PlemolJP Nerd Fonts版
+#      plemoljp-hs                   # PlemolJP Half-Size版
+#      moralerspace                  # Moralerspace
+#      moralerspace-hw               # Moralerspace Half-Width版
     ];
 
     # フォントディレクトリの有効化
