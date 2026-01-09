@@ -5,7 +5,8 @@
   services.xserver.enable = true;
 
   # ディスプレイマネージャー: SDDM (ログイン画面)
-  services.displayManager.sddm.enable = true;
+#  services.displayManager.sddm.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
 
   # デスクトップ環境: Cinnamon
   services.xserver.desktopManager.cinnamon.enable = true;
