@@ -1,0 +1,60 @@
+# Ghostty おしゃれな赤系テーマ設定
+
+# テーマ - 赤系の要素が強いMonokai
+#theme = Monokai Soda
+
+# フォント設定 - モダンでおしゃれなフォント
+font-family = Fira Code
+font-size = 14
+font-style = Regular
+font-feature = +calt
+font-feature = +liga
+
+# ウィンドウの見た目
+window-padding-x = 25
+window-padding-y = 25
+window-padding-color = extend
+window-width = 110
+window-height = 30
+window-save-state = always
+
+# 背景の透明度でおしゃれに（めっちゃ薄い透明）
+background-opacity = 0.8
+
+# カーソルを赤色に
+#cursor-color = #ff2c6d
+#cursor-style = block
+#cursor-style-blink = true
+
+# カスタムカラー設定（青系の背景）
+#foreground = #ff0000
+#background = #00bfff
+
+# 背景画像
+#background-image = /Users/[ユーザー名]/Downloads/しろくま.png
+#background-image-fit = cover
+#background-image-position = center
+
+# 赤系のアクセントカラー
+#palette = 1=#ff5555
+#palette = 9=#ff6e67
+
+# ピンク/赤系の強調色
+#palette = 5=#ff79c6
+#palette = 13=#ff92d0
+
+# ウィンドウの装飾
+#window-decoration = true
+#macos-titlebar-style = transparent
+
+# アニメーション
+quick-terminal-animation-duration = 0.3
+
+# その他のおしゃれ設定
+auto-update = download
+clipboard-read = allow
+clipboard-write = allow
+
+# キーバインド
+keybind = super+n=new_window
+keybind = super+t=new_tab
