@@ -9,7 +9,10 @@
       # noto-fonts-cjk-sans         # 中日韓フォント (必要に応じて)
       noto-fonts-color-emoji        # カラー絵文字
       liberation_ttf                # Liberation (Arial/Times New Roman代替)
-      
+      biz-ud-gothic
+      jigmo
+      hanazono
+
       # プログラミング用等幅フォント
       fira-code                     # Fira Code (合字対応)
       fira-code-symbols
