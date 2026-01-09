@@ -32,14 +32,7 @@ in
     wezterm
     ghostty
     
-    swaybg
-    swayidle
-    swaylock
-    grim slurp
-    mako
-    wofi fuzzel
     alacritty kitty foot
-    autotiling
 
     google-chrome
 
