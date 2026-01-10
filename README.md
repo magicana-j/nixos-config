@@ -1,5 +1,10 @@
 # NixOS & flakes, home-manager環境構築
 
+デスクトップ環境：KDE Plasma 6
+日本語入力ソフトウェア：fcitx5(mozc)
+
+ユーザーディレクトリ名は英語に変更されます。
+
 ## セットアップ手順
 
 ### クイックスタート（サンプル設定で試す場合）
@@ -11,13 +16,9 @@ cd ~/nixos-config
 ```
 
 ```bash
-./install.sh
+./setup.sh
 cd ../nixos
-```
-
-```bash
-sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix
-sudo nixos-rebuild switch --flake .#mynixos
+sudo nixos-rebuild switch --flake .#
 ```
 
 **注意**: この方法では`user-config.nix.example`のデフォルト値が使用されます。
@@ -25,19 +26,13 @@ sudo nixos-rebuild switch --flake .#mynixos
 
 ### 本番環境のセットアップ
 
-#### 1. リポジトリのクローン
-```bash
-git clone https://github.com/yourusername/nixos-config.git /etc/nixos
-cd /etc/nixos
-```
-
-#### 2. ユーザー設定ファイルの作成
+#### 1. ユーザー設定ファイルの作成
 ```bash
 cp user-config.nix.example user-config.nix
 cp git.nix.example git.nix
 ```
 
-#### 3. 設定ファイルの編集
+#### 2. 設定ファイルの編集
 
 `user-config.nix`を編集して、自分の環境に合わせて設定します：
 ```bash
@@ -52,22 +47,25 @@ nano git.nix
 - `userFullName`: フルネーム（Gitなどで使用）
 - `userEmail`: メールアドレス
 
-#### 4. ハードウェア設定の生成
-```bash
-sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix
-```
-
 #### 5. 設定の適用
 ```bash
-# user-config.nixで設定したホスト名を使用
-sudo nixos-rebuild switch --flake .#あなたのホスト名
+sudo nixos-rebuild switch --flake .#
+```
 
-# または、サンプル設定のデフォルトホスト名(mynixos)を使用する場合
-sudo nixos-rebuild switch --flake .#mynixos
+#### 6. 再起動
 
-# 一度セットアップが成功したあとは次のコマンドでリビルドできます。
+一度セットアップが成功したあとは次のコマンドでリビルドできます。
+
+```bash
 nsrf
 ```
+
+### KDE Plasma 6 上でのfcitx5の設定
+
+メニュー - KDE システム設定 - キーボード - 仮想キーボード
+
+で、「Fcitx5」を選択し、「適用」をクリックしてください。
+
 
 ## 設定ファイルについて
 
