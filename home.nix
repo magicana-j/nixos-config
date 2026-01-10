@@ -18,7 +18,7 @@ in
 
   imports = [
     # git設定ファイル(git.nix)を作成してから次の行のコメントを解除
-    ./git.nix
+#    ./git.nix
   ];
 
   home.packages = with pkgs; [

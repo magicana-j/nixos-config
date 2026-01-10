@@ -1,7 +1,7 @@
 # NixOS & flakes, home-manager環境構築
 
-デスクトップ環境：KDE Plasma 6
-日本語入力ソフトウェア：fcitx5(mozc)
+- デスクトップ環境：KDE Plasma 6
+- 日本語入力ソフトウェア：fcitx5(mozc)
 
 ユーザーディレクトリ名は英語に変更されます。
 
@@ -12,11 +12,10 @@
 リポジトリをクローンして、すぐに試すことができます：
 ```bash
 git clone https://github.com/yourusername/nixos-config.git ~/
-cd ~/nixos-config
-```
 
-```bash
+cd ~/nixos-config
 ./setup.sh
+
 cd ../nixos
 sudo nixos-rebuild switch --flake .#
 ```
@@ -27,6 +26,9 @@ sudo nixos-rebuild switch --flake .#
 ### 本番環境のセットアップ
 
 #### 1. ユーザー設定ファイルの作成
+
+`~/nixos`ディレクトリで
+
 ```bash
 cp user-config.nix.example user-config.nix
 cp git.nix.example git.nix
@@ -35,6 +37,7 @@ cp git.nix.example git.nix
 #### 2. 設定ファイルの編集
 
 `user-config.nix`を編集して、自分の環境に合わせて設定します：
+
 ```bash
 nano user-config.nix
 
@@ -48,6 +51,7 @@ nano git.nix
 - `userEmail`: メールアドレス
 
 #### 5. 設定の適用
+
 ```bash
 sudo nixos-rebuild switch --flake .#
 ```
@@ -64,7 +68,7 @@ nsrf
 
 メニュー - KDE システム設定 - キーボード - 仮想キーボード
 
-で、「Fcitx5」を選択し、「適用」をクリックしてください。
+で「Fcitx5」を選択し、「適用」をクリックしてください。
 
 
 ## 設定ファイルについて
