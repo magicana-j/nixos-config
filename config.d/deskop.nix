@@ -10,12 +10,12 @@
     theme = "breeze";
     settings = {
       Theme = {
-        Background = "/etc/nixos/wallpaper.png";
+#        Background = "/etc/nixos/wallpaper.png";
         Blur = true;
       };
     };
   };
-  
+
 #  services.xserver.displayManager.lightdm.enable = true;
 
   # デスクトップ環境: Cinnamon
