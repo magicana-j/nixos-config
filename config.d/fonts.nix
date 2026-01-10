@@ -21,7 +21,6 @@
       
       # 日本語プログラミングフォント
       mplus-outline-fonts.githubRelease  # M+ Outline
-      biz-ud-gothic
       udev-gothic                   # UDEVゴシック
       udev-gothic-nf                # UDEVゴシック Nerd Fonts版
       hackgen-font                  # 白源/HackGen
