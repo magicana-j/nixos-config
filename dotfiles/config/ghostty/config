@@ -11,15 +11,15 @@ font-feature = +calt
 font-feature = +liga
 
 # ウィンドウの見た目
-window-padding-x = 25
-window-padding-y = 25
+window-padding-x = 5
+window-padding-y = 5
 window-padding-color = extend
 window-width = 110
 window-height = 30
 window-save-state = always
 
 # 背景の透明度でおしゃれに（めっちゃ薄い透明）
-background-opacity = 0.8
+background-opacity = 0.65
 
 # カーソルを赤色に
 #cursor-color = #ff2c6d

@@ -25,9 +25,9 @@ environment {
     DISPLAY null
 }
 
+spawn-at-startup "waybar"
 spawn-at-startup "nm-applet"
 spawn-at-startup "fcitx5 -d"
-spawn-at-startup "waybar"
 
 input {
     keyboard {

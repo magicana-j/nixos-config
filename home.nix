@@ -20,7 +20,7 @@ in
     # git設定ファイル(git.nix)を作成してから次の行のコメントを解除
     ./git.nix
   ];
-  
+
   home.packages = with pkgs; [
     home-manager
     neovim
@@ -31,7 +31,7 @@ in
     tmux
     wezterm
     ghostty
-    
+
     alacritty kitty foot
 
     google-chrome
@@ -48,6 +48,8 @@ in
     shotcut
     shotwell
     vlc
+
+    libreoffice-still
 
   ];
 
@@ -82,6 +84,20 @@ in
 
   home.sessionVariables = {
     EDITOR = "nvim";
+  };
+
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+
+    desktop = "$HOME/Desktop";
+    documents = "$HOME/Documents";
+    download = "$HOME/Downloads";
+    music = "$HOME/Music";
+    pictures = "$HOME/Pictures";
+    publicShare = "$HOME/Public";
+    templates = "$HOME/Templates";
+    videos = "$HOME/Videos";
   };
 
   programs.home-manager.enable = true;

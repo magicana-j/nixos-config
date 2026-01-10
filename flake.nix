@@ -19,9 +19,9 @@
         if builtins.pathExists customConfig
         then customConfig
         else exampleConfig;
-      
+
     userConfig = import userConfigPath;
-    
+
     inherit (userConfig) system myName myHostname;
   in {
     nixosConfigurations.${myHostname} = nixpkgs.lib.nixosSystem {
@@ -29,7 +29,7 @@
       specialArgs = {
         inherit myName myHostname userConfig;
       };
-      
+
       modules = [
         ./configuration.nix
 
@@ -37,6 +37,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+            backupFileExtension = "backup";
             users.${myName} = import ./home.nix;
             extraSpecialArgs = {
               inherit myName userConfig;
