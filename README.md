@@ -61,7 +61,7 @@ sudo nixos-rebuild switch --flake .#
 一度セットアップが成功したあとは次のコマンドでリビルドできます。
 
 ```bash
-nsrf
+nrsf
 ```
 
 ### KDE Plasma 6 上でのfcitx5の設定
