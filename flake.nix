@@ -10,62 +10,31 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
-  let
-    userConfigExists = builtins.pathExists (self.outPath + "/user-config.nix");
+    let
+      system = "x86_64-linux"; # 必要なら変える
 
-    userConfig =
-      if userConfigExists
-      then import ./user-config.nix
-      else throw ''
-
-        ========================================
-        エラー: user-config.nix が見つかりません
-        ========================================
-
-        初回セットアップ手順:
-
-        1. 現在のユーザー名を確認:
-            whoami
-
-        2. setup.sh を実行:
-            cd ${self.outPath}
-            ./setup.sh
-
-            重要: username は現在ログインしているユーザー名と
-                  完全に一致させてください!
-
-        4. 再度ビルドを実行
-
-        ========================================
-      '';
-
-    inherit (userConfig) system myName myHostname;
-  in {
-    nixosConfigurations.${myHostname} = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        inherit myName myHostname;
-        inherit userConfig;
+      # NOTE:
+      # userName は NixOS インストール時に作成したユーザー名と一致させること
+      # 変更すると users.users / home-manager が破綻する
+      userName = "amuharai";   # インストール時と同じユーザー名
+      fullName = "Change Me";  # 後でここだけ変える
+      hostName = "change-me";  # 後でここだけ変える
+      commonArgs = { inherit system userName hostName fullName; };
+    in {
+      nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = commonArgs;
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            home-manager.extraSpecialArgs = commonArgs;
+            home-manager.users.${userName} = import ./home.nix;
+          }
+        ];
       };
-
-      modules = [
-        ./configuration.nix
-
-        home-manager.nixosModules.home-manager {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "backup";
-            users.${myName} = import ./home.nix;
-            extraSpecialArgs = {
-              inherit myName userConfig;
-            };
-          };
-        }
-
-      ];
-
-	  };
-  };
+    };
 
 }

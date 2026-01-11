@@ -1,9 +1,6 @@
 { config, pkgs, lib, myHostname, ... }:
 
 {
-  # ホスト名の設定
-  networking.hostName = myHostname;
-
   # NetworkManager: ネットワーク接続の管理
   # GUI環境で簡単にWi-Fiや有線LANを管理できる
   networking.networkmanager.enable = true;

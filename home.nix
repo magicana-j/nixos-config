@@ -1,4 +1,4 @@
-{ config, pkgs, lib, myName, myHostname, userConfig, ... }:
+{ config, pkgs, lib, userName, fullName, hostName, ... }:
 
 let
   dotfilesDir = ./dotfiles;
@@ -13,26 +13,34 @@ let
   ];
 in
 {
-  home.username = myName;
-  home.homeDirectory = "/home/${myName}";
+  home.username = userName;
+  home.homeDirectory = "/home/${userName}";
 
-  imports = [
-    # git設定ファイル(git.nix)を作成してから次の行のコメントを解除
-#    ./git.nix
-  ];
+  # バージョン管理ツール
+  programs.git = {
+    enable = true;
+
+    settings = {
+      user.name = fullName;
+      user.email = "";
+      init.defaultBranch = "main";
+      
+      # Access Github through SSH
+      # Uncomment the following two lines when you want to enable
+#      url."git@github.com:".insteadOf = "https://github.com/";
+#      url."ssh://git@github.com".insteadOf = "https://github.com";
+    };
+  };
 
   home.packages = with pkgs; [
     home-manager
     neovim
     geany
     gparted
-    stow
 
     tmux
     wezterm
     ghostty
-
-    alacritty kitty foot
 
     google-chrome
 
@@ -51,6 +59,7 @@ in
 
     libreoffice-still
 
+    flatpak
   ];
 
   ## bash
@@ -61,7 +70,8 @@ in
       la = "ls -a";
       ll = "ls -al";
       l = "ls -alF";
-      nrsf = "sudo nixos-rebuild switch --flake .#$(hostname)";
+      nrsf = "sudo nixos-rebuild switch --flake .#${hostName}";
+      nrb = "sudo nixos-rebuild dry-build --flake .#${hostName}";
     };
   };
 

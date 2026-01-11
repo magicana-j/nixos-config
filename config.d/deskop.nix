@@ -10,25 +10,24 @@
 #     theme = "breeze";
 #     settings = {
 #       Theme = {
-#         Background = "/etc/nixos/wallpaper.png";
 #         Blur = true;
 #       };
 #     };
 #   };
-  
- services.xserver.displayManager.lightdm.enable = true;
+
+#  services.xserver.displayManager.lightdm.enable = true;
 
   # デスクトップ環境: Cinnamon
- services.xserver.desktopManager.cinnamon.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
 
   # デスクトップ環境: KDE Plasma 6
 #   services.desktopManager.plasma6.enable = true;
 
-#   # PAMでログイン時にkeyringを解錠（SDDM + ログイン両方）
+  # PAMでログイン時にkeyringを解錠（SDDM + ログイン両方）
 #   security.pam.services.sddm.enableGnomeKeyring = true;
 #   security.pam.services.login.enableGnomeKeyring = true;
-#
-#   # KWallet側のPAMは切る（両立させると「どっち解錠？」になってうるさい）
+
+  # KWallet側のPAMは切る（両立させると「どっち解錠？」になってうるさい）
 #   security.pam.services.sddm.kwallet.enable = lib.mkForce false;
 #   security.pam.services.login.kwallet.enable = lib.mkForce false;
 
