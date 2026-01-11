@@ -18,9 +18,8 @@ cd ~/nixos-config
 
 設定項目：
 - `myName`: ユーザー名
-- `myHostname`: ホスト名
 - `userFullName`: フルネーム
-- `userEmail`: メールアドレス（Gitで使用）
+- `myHostname`: ホスト名
 
 ### Gitユーザー設定ファイルを作る
 
