@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  i18n.defaultLocale = lib.mkDefault "ja_JP.UTF-8";
+
   # 日本語入力メソッド: Fcitx5
   i18n.inputMethod = {
     enable = true;
