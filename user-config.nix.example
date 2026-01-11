@@ -28,11 +28,12 @@
   # 例: "alice", "bob", "yourname"
   myName = "CHANGE_ME";  # ← ここを変更してください
 
+# ユーザー情報
+  userFullName = "Your Name";
+
   # ホスト名
   # 例: "nixos-laptop", "desktop-pc", "mycomputer"
   myHostname = "CHANGE_ME";  # ← ここを変更してください
 
-  # ユーザー情報（Home Manager用）
-  userFullName = "Your Name";
 
 }
