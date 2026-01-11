@@ -11,23 +11,41 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
-    userConfigPath =
-      let
-        customConfig = self.outPath + "/user-config.nix";
-        exampleConfig = self.outPath + "/user-config.nix.example";
-      in
-        if builtins.pathExists customConfig
-        then customConfig
-        else exampleConfig;
+    userConfigExists = builtins.pathExists (self.outPath + "/user-config.nix");
 
-    userConfig = import userConfigPath;
+    userConfig =
+      if userConfigExists
+      then import ./user-config.nix
+      else throw ''
+
+        ========================================
+        エラー: user-config.nix が見つかりません
+        ========================================
+
+        初回セットアップ手順:
+
+        1. 現在のユーザー名を確認:
+            whoami
+
+        2. setup.sh を実行:
+            cd ${self.outPath}
+            ./setup.sh
+
+            重要: username は現在ログインしているユーザー名と
+                  完全に一致させてください!
+
+        4. 再度ビルドを実行
+
+        ========================================
+      '';
 
     inherit (userConfig) system myName myHostname;
   in {
     nixosConfigurations.${myHostname} = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        inherit myName myHostname userConfig;
+        inherit myName myHostname;
+        inherit userConfig;
       };
 
       modules = [
