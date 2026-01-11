@@ -55,7 +55,7 @@ fi
 echo ""
 echo "Please enter configuration information:"
 echo ""
-echo " Username: [$CURRENT_USER]"
+echo "Username: [$CURRENT_USER]"
 
 read -p "Hostname [$(hostname)]: " INPUT_HOSTNAME
 HOSTNAME=${INPUT_HOSTNAME:-$(hostname)}
