@@ -51,22 +51,11 @@ if [ -f "user-config.nix" ]; then
   fi
 fi
 
-# Check user-config.nix.example
-if [ ! -f "user-config.nix.example" ]; then
-  echo "Error: user-config.nix.example not found"
-  exit 1
-fi
-
-# Copy
-cp user-config.nix.example user-config.nix
-echo "✓ Created user-config.nix"
-
 # User input
 echo ""
 echo "Please enter configuration information:"
 echo ""
-read -p "Username [$CURRENT_USER]: " INPUT_USERNAME
-USERNAME=${INPUT_USERNAME:-$CURRENT_USER}
+echo " Username: [$CURRENT_USER]
 
 read -p "Hostname [$(hostname)]: " INPUT_HOSTNAME
 HOSTNAME=${INPUT_HOSTNAME:-$(hostname)}
@@ -81,8 +70,8 @@ cat > user-config.nix << EOF
   # Auto-generated on: $(date)
 
   system = "x86_64-linux";
-  username = "$USERNAME";
-  hostname = "$HOSTNAME";
+  myName = "$CURRENT_USER";
+  myHostname = "$HOSTNAME";
 
   userFullName = "$FULLNAME";
   userEmail = "$EMAIL";
@@ -96,7 +85,7 @@ echo "Configuration Complete"
 echo "========================================="
 echo ""
 echo "Configuration summary:"
-echo "  Username: $USERNAME"
+echo "  Username: $CURRENT_USER"
 echo "  Hostname: $HOSTNAME"
 echo "  Full name: $FULLNAME"
 echo "  Email: $EMAIL"
@@ -105,7 +94,7 @@ echo ""
 echo ""
 echo "Next step:"
 echo ""
-echo "  1. Check if configuration is correct:"
+echo "  1. Check if the configuration is correct:"
 echo "     sudo nixos-rebuild dry-build --flake $CONFIG_DIR#$HOSTNAME"
 echo ""
 echo "  2. Apply configuration:"
