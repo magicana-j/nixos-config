@@ -56,12 +56,10 @@ echo ""
 echo "Please enter configuration information:"
 echo ""
 echo "Username: [$CURRENT_USER]"
-
-read -p "Hostname [$(hostname)]: " INPUT_HOSTNAME
-HOSTNAME=${INPUT_HOSTNAME:-$(hostname)}
-
 read -p "Full name: " FULLNAME
-read -p "Email address: " EMAIL
+read -p "Hostname [$(hostname)]: " INPUT_HOSTNAME
+
+HOSTNAME=${INPUT_HOSTNAME:-$(hostname)}
 
 # Update user-config.nix
 cat > user-config.nix << EOF
@@ -71,10 +69,8 @@ cat > user-config.nix << EOF
 
   system = "x86_64-linux";
   myName = "$CURRENT_USER";
-  myHostname = "$HOSTNAME";
-
   userFullName = "$FULLNAME";
-  userEmail = "$EMAIL";
+  myHostname = "$HOSTNAME";
 
 }
 EOF
@@ -86,9 +82,8 @@ echo "========================================="
 echo ""
 echo "Configuration summary:"
 echo "  Username: $CURRENT_USER"
-echo "  Hostname: $HOSTNAME"
 echo "  Full name: $FULLNAME"
-echo "  Email: $EMAIL"
+echo "  Hostname: $HOSTNAME"
 echo ""
 
 echo ""
