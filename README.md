@@ -1,59 +1,61 @@
 # NixOS & flakes, home-manager環境構築
 
-- デスクトップ環境：KDE Plasma 6
+- デスクトップ環境：Cinnamon
 - 日本語入力ソフトウェア：fcitx5(mozc)
 
 ユーザーディレクトリ名は英語に変更されます。
 
 ## セットアップ手順
 
-### クイックスタート（サンプル設定で試す場合）
-
-リポジトリをクローンして、すぐに試すことができます：
 ```bash
 git clone https://github.com/yourusername/nixos-config.git ~/
 
 cd ~/nixos-config
 ./setup.sh
-
-cd ../nixos
-sudo nixos-rebuild switch --flake .#
 ```
 
-**注意**: この方法では`user-config.nix.example`のデフォルト値が使用されます。
-本番環境では必ず以下の「本番環境のセットアップ」を実行してください。
+### 設定ファイルの編集
 
-### 本番環境のセットアップ
+設定項目：
+- `myName`: ユーザー名
+- `myHostname`: ホスト名
+- `userFullName`: フルネーム
+- `userEmail`: メールアドレス（Gitで使用）
 
-#### 1. ユーザー設定ファイルの作成
+### Gitユーザー設定ファイルを作る
 
-`~/nixos`ディレクトリで
+#### 設定ファイルのコピー
 
 ```bash
-cp user-config.nix.example user-config.nix
 cp git.nix.example git.nix
 ```
 
-#### 2. 設定ファイルの編集
+#### 設定ファイルの編集
 
-`user-config.nix`を編集して、自分の環境に合わせて設定します：
+1. `user.name`を編集
 
-```bash
-nano user-config.nix
+2. SSH接続をする場合は次の箇所のコメントを解除
 
-nano git.nix
+```
+#      url."git@github.com:".insteadOf = "https://github.com/";
+#      url."ssh://git@github.com".insteadOf = "https://github.com";
 ```
 
-必須の設定項目：
-- `myName`: ユーザー名
-- `myHostname`: ホスト名
-- `userFullName`: フルネーム（Gitなどで使用）
-- `userEmail`: メールアドレス
+#### home.nix の編集
 
-#### 5. 設定の適用
+次の箇所のコメントを解除
+
+```
+  imports = [
+    # git設定ファイル(git.nix)を作成してから次の行のコメントを解除
+#    ./git.nix
+  ];
+```
+
+### 設定の適用
 
 ```bash
-sudo nixos-rebuild switch --flake .#
+sudo nixos-rebuild switch --flake .#ホスト名
 ```
 
 #### 6. 再起動
@@ -63,34 +65,3 @@ sudo nixos-rebuild switch --flake .#
 ```bash
 nrsf
 ```
-
-### KDE Plasma 6 上でのfcitx5の設定
-
-メニュー - KDE システム設定 - キーボード - 仮想キーボード
-
-で「Fcitx5」を選択し、「適用」をクリックしてください。
-
-
-## 設定ファイルについて
-
-### 自動フォールバック機能
-
-`user-config.nix`が存在しない場合、システムは自動的に`user-config.nix.example`を読み込みます。
-ただし、デフォルト値が使用されるため、ビルド時に警告メッセージが表示されます。
-
-### 推奨される運用方法
-
-1. **初回テスト**: サンプル設定でシステムが動作することを確認
-2. **カスタマイズ**: `user-config.nix`を作成して自分の環境に合わせる
-3. **本番運用**: カスタマイズした設定で運用
-
-## ファイル管理
-
-Git管理されないファイル：
-- `user-config.nix` - 個人設定（各自で作成）
--  git.nix 個人のgit設定（各自で作成）
-- `hardware-configuration.nix` - ハードウェア固有設定（各自で生成）
-
-Git管理されるファイル：
-- `user-config.nix.example` - サンプル設定
-- その他の設定ファイル
