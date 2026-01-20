@@ -5,7 +5,6 @@ let
   cfgDirs = [
     "alacritty"
     "fastfetch"
-    "foot"
     "kitty"
     "ghostty"
     "nvim"
@@ -24,7 +23,7 @@ in
       user.name = fullName;
       user.email = "";
       init.defaultBranch = "main";
-      
+
       # Access Github through SSH
       # Uncomment the following two lines when you want to enable
 #      url."git@github.com:".insteadOf = "https://github.com/";
