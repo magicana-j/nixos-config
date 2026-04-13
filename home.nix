@@ -1,115 +1,112 @@
-{ config, pkgs, lib, userName, fullName, hostName, ... }:
+# ★ vars を引数に追加
+{ config, pkgs, lib, vars, ... }:
 
-let
-  dotfilesDir = ./dotfiles;
-  cfgDirs = [
-    "alacritty"
-    "fastfetch"
-    "kitty"
-    "ghostty"
-    "nvim"
-    "tmux"
-  ];
-in
 {
-  home.username = userName;
-  home.homeDirectory = "/home/${userName}";
+  # ================================
+  # 基本ユーザー情報（変数使用）
+  # ================================
+  home.username = vars.user.userName;
+  home.homeDirectory = "/home/${vars.user.userName}";
+  home.stateVersion = vars.release;
 
-  # バージョン管理ツール
+  # ================================
+  # Git設定（変数使用）
+  # ================================
   programs.git = {
     enable = true;
-
     settings = {
-      user.name = fullName;
-      user.email = "";
       init.defaultBranch = "main";
+      core = {
+        editor = "vim";
+        autocrlf = "input";
+        quotepath = false;
+        whitespace = "trailing-space,space-before-tab";
+      };
+      pull.rebase = false;
+      push.default = "simple";
+      color.ui = "auto";
+    };
 
-      # Access Github through SSH
-      # Uncomment the following two lines when you want to enable
-#      url."git@github.com:".insteadOf = "https://github.com/";
-#      url."ssh://git@github.com".insteadOf = "https://github.com";
+    settings.user.name = vars.git.name;
+    settings.user.email = vars.git.email;
+    settings.alias = {
+      st = "status";
+      co = "checkout";
+      br = "branch";
+      cm = "commit -m";
+      lg = "log --oneline --graph --decorate --all";
+      dif = "diff --stat";
     };
   };
 
+  # ================================
+  # Vim設定
+  # ================================
+  programs.vim.defaultEditor = true;
+  programs.vim.settings = {
+    number = true;         # 行番号を表示
+    relativenumber = true; # 相対行番号を表示
+    shiftwidth = 2;        # インデント幅を2に設定
+    tabstop = 2;           # タブ文字の表示幅を2に設定
+    expandtab = true;      # タブの代わりにスペースを使用
+    smartindent = true;    # オートインデントを有効化
+  };
+
+  # 追加のカスタム設定（extraConfig）
+  programs.vim.extraConfig = ''
+    set mouse=a            " マウス操作を有効化
+    set ignorecase         " 検索時に大文字小文字を区別しない
+    set smartcase          " 大文字が含まれる場合は区別する
+    set hlsearch           " 検索結果をハイライト
+    set clipboard=unnamedplus " システムのクリップボードと同期
+    syntax on              " シンタックスハイライトを有効化
+  '';
+
+  # ================================
+  # ユーザーパッケージ
+  # ================================
   home.packages = with pkgs; [
-    home-manager
-    neovim
+    firefox
+    htop btop fastfetch
+    tree
+    unzip
+    ripgrep
+    fd
+    #vim
+    neovim 
     geany
+    
     gparted
 
-    tmux
-    wezterm
-    ghostty
+    tmux wezterm ghostty
 
     google-chrome
-    zoom.us
+    zoom-us
 
-    podman
-    podman-compose
+    podman podman-compose
 
-    shotwell
-    gimp
+    shotwell gimp
 
-    audacity
-    obs-studio
-    shotcut
-    shotwell
+    audacity ffmpeg obs-studio shotcut shotwell
     vlc
 
     libreoffice-still
 
-    flatpak
   ];
 
-  ## bash
+  # ================================
+  # シェル設定
+  # ================================
   programs.bash = {
-	enable = true;
-    enableCompletion = true;
+    enable = true;
     shellAliases = {
-      la = "ls -a";
-      ll = "ls -al";
-      l = "ls -alF";
-      nrsf = "sudo nixos-rebuild switch --flake .#${hostName}";
-      nrb = "sudo nixos-rebuild dry-build --flake .#${hostName}";
+      ll = "ls -alF";
+      la = "ls -A";
+      l = "ls -CF";
+      ".." = "cd ..";
+      grep = "grep --color=auto";
     };
-  };
-
-  ## Direnv for project-specific environments
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  home.file = {
-    ".vim" = {
-      source = "${dotfilesDir}/.vim";
-      recursive = true;
-    };
-  } // lib.genAttrs cfgDirs (name: {
-    target = ".config/${name}";
-    source = "${dotfilesDir}/config/${name}";
-    recursive = true;
-  });
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
-  xdg.userDirs = {
-    enable = true;
-    createDirectories = true;
-
-    desktop = "$HOME/Desktop";
-    documents = "$HOME/Documents";
-    download = "$HOME/Downloads";
-    music = "$HOME/Music";
-    pictures = "$HOME/Pictures";
-    publicShare = "$HOME/Public";
-    templates = "$HOME/Templates";
-    videos = "$HOME/Videos";
   };
 
   programs.home-manager.enable = true;
-
-  home.stateVersion = "25.11"; # Please read the comment before changing.
 }

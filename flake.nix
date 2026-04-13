@@ -1,40 +1,65 @@
 {
-  description = "NixOS + flakes + home-manager configs";
+  description = "NixOS with Home Manager, Git";
 
   inputs = {
+    # ★ バージョン番号を揃えること ★
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
-      system = "x86_64-linux"; # 必要なら変える
+      system = "x86_64-linux";
 
-      # NOTE:
-      # userName は NixOS インストール時に作成したユーザー名と一致させること
-      # 変更すると users.users / home-manager が破綻する
-      userName = "amuharai";   # インストール時と同じユーザー名
-      fullName = "Change Me";  # 後でここだけ変える
-      hostName = "change-me";  # 後でここだけ変える
-      commonArgs = { inherit system userName hostName fullName; };
+      # ===============================================
+      # ★ 設定変更はここだけを編集すればOK ★
+
+      vars = {
+        release = "25.11";     # ★ バージョン番号を揃えること ★
+        system = {
+          hostName = "nixos-pc";
+          timeZone = "Asia/Tokyo";
+          localeJP = "ja_JP.UTF-8";
+          localeEN = "en_US.UTF-8";
+        };
+        user = {
+          userName = "amuharai";
+          shell = "bash";
+        };
+        git = {
+          name = "magicana-j";
+          email = "amuharai@example.dom";
+        };
+      };
+
+      # ===============================================
+
     in {
-      nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.${vars.system.hostName} = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = commonArgs;
+        
+        # NixOSモジュールに変数を渡す
+        specialArgs = { inherit vars inputs; };
+        
         modules = [
+          ./hardware-configuration.nix
           ./configuration.nix
-          home-manager.nixosModules.home-manager {
+          
+          home-manager.nixosModules.home-manager
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = commonArgs;
-            home-manager.users.${userName} = import ./home.nix;
+            
+            # Home Managerモジュールに変数を渡す
+            home-manager.extraSpecialArgs = { inherit vars; };
+            home-manager.users.${vars.user.userName} = import ./home.nix;
           }
         ];
       };
     };
-
 }

@@ -1,90 +1,202 @@
-{ config, pkgs, lib, userName, hostName, fullName, ... }:
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
 
-let
-  # config.dディレクトリ内のすべての.nixファイルを自動的にインポート
-  configDir = ./config.d;
-  nixFiles = builtins.readDir configDir;
-  importNixFiles = lib.mapAttrsToList
-    (name: type:
-      if type == "regular" && lib.hasSuffix ".nix" name
-      then configDir + "/${name}"
-      else null
-    )
-    nixFiles;
-  validImports = builtins.filter (x: x != null) importNixFiles;
-in
+{ config, pkgs, lib, vars, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ] ++ validImports;
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
 
-  networking.hostName = hostName;
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  users.users.${userName} = {
-    isNormalUser = true;
+  # ================================
+  # ネットワーク設定（変数使用）
+  # ================================
+  networking.hostName = vars.system.hostName;
 
-    # ユーザーのフルネーム (表示名)
-    description = fullName;
-    
-    # 所属グループ
-    # グループに所属することで特定の権限や機能が使えるようになる
-    extraGroups = [
-      "networkmanager"  # ネットワーク設定の変更権限
-      "wheel"           # sudo権限 (管理者コマンド実行)
-      "video"           # ビデオデバイスへのアクセス
-      "audio"           # オーディオデバイスへのアクセス
-      #"libvirt"         # 仮想マシン管理 (KVM/QEMU)
-      "podman"          # Podmanコンテナの管理
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Enable networking
+  networking.networkmanager.enable = true;
+
+  # ================================
+  # タイムゾーンとロケール設定（変数使用）
+  # ================================
+  time.timeZone = vars.system.timeZone;
+  
+  i18n = {
+    defaultLocale = vars.system.localeJP;
+    extraLocaleSettings = {
+      LC_ADDRESS = vars.system.localeJP;
+      LC_IDENTIFICATION = vars.system.localeJP;
+      LC_MEASUREMENT = vars.system.localeJP;
+      LC_MONETARY = vars.system.localeJP;
+      LC_NAME = vars.system.localeJP;
+      LC_NUMERIC = vars.system.localeJP;
+      LC_PAPER = vars.system.localeJP;
+      LC_TELEPHONE = vars.system.localeJP;
+      LC_TIME = vars.system.localeJP;
+    };
+  };
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the Cinnamon Desktop Environment.
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "jp";
+    variant = "";
+  };
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
+
+
+  # ================================
+  # fcitx5日本語入力システム
+  # ================================
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
     ];
   };
 
-  # flakes を有効化（導入直後に入れる定番）
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # ダウンロードバッファサイズ: 500 MiB
-  # 大きなパッケージのダウンロードを高速化
-  nix.settings.download-buffer-size = 524288000;
-  
-  # ストアの自動最適化
-  # 同一ファイルをハードリンクで共有してディスク容量を節約
-  nix.settings.auto-optimise-store = true;
-  
-  # バイナリキャッシュの設定
-  # ビルド済みパッケージをダウンロードしてコンパイル時間を短縮
-  nix.settings.substituters = [
-    # 公式キャッシュ (デフォルトで有効)
-    # "https://cache.nixos.org"
+  # ================================
+  # フォント設定（日本語表示）
+  # ================================
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+      source-han-sans
+      source-han-serif
+    ];
     
-    # Nix Communityのキャッシュ
-    "https://nix-community.cachix.org"
-    
-    # 必要に応じて他のCachixキャッシュを追加
-  ];
-
-  # キャッシュの公開鍵 (署名検証用)
-  nix.settings.trusted-public-keys = [
-    # 公式キャッシュの鍵 (デフォルトで含まれる)
-    # "cache.nixos.org-1:【公式キー】"
-    
-    # Nix Communityキャッシュの鍵
-    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-  ];
-
-  # 信頼されたユーザー
-  # これらのユーザーは追加のバイナリキャッシュを使用できる
-  nix.settings.trusted-users = [ "root" userName ];
-
-  # 自動ガベージコレクション
-  # 古い世代のパッケージを自動削除してディスク容量を節約
-  nix.gc = {
-    automatic = true;
-    # 実行頻度: 毎週
-    dates = "weekly";
-    # 7日より古いものを削除
-    options = "--delete-older-than 7d";
+    fontconfig.defaultFonts = {
+      serif = [ "Noto Serif CJK JP" "Source Han Serif JP" ];
+      sansSerif = [ "Noto Sans CJK JP" "Source Han Sans JP" ];
+      monospace = [ "Noto Sans Mono CJK JP" ];
+    };
   };
 
-  # システムバージョン (このシステムで最初にインストールしたNixOSのバージョン)
-  system.stateVersion = "25.11";
+  # ================================
+  # ユーザー設定（変数使用）
+  # ================================
+  users.users.${vars.user.userName} = {
+    isNormalUser = true;
+    description = "${vars.user.userName} user";
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
+    shell = pkgs.${vars.user.shell};
+  };
+
+  # Install firefox.
+  programs.firefox.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # ================================
+  # システム共通パッケージ
+  # ================================
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    curl
+    git
+    lxqt.lxqt-archiver
+    xarchiver
+    source-han-code-jp
+  ];
+
+  # ================================
+  # Git（システムレベル）
+  # ================================
+  programs.git = {
+    enable = true;
+    config = {
+      init.defaultBranch = "main";
+    };
+  };
+
+  # ================================
+  # Nix設定（Flakes有効化）
+  # ================================
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+    
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+  };
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  #system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = vars.release;
+
 }
