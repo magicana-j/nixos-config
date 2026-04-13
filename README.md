@@ -37,34 +37,28 @@
     cd
     nix-shell -p git --run 'git clone https://github.com/magicana-j/nixos-config'
 
-### 2. setup.sh を実行
+### 2. ファイルをコピー
 
-    cd ~/nixos-config
-    ./setup.sh
+    cd
+    mkdir mynixos
+    cd nixos-config
+    cp configuration.nix ../mynixos
+    cp flake.nix ../mynixos
+    cp home.nix ../mynixos
 
 ### 3. flake.nix を編集
 
-ユーザー名、フルネーム、ホスト名を編集します。
+    cd mynixos
+
+`flake.nix` の `vars` ブロックでユーザー名、フルネーム、ホスト名を編集します。
 特にユーザー名はインストール時のログイン名と一致させてください。
 
 ### 4. nixos-rebuild を実行
 
     cd ../nixos
-    sudo nixos-rebuild switch --flake .#
+    sudo nixos-rebuild switch --flake .#nixos-pc
 
 ### 5. 再起動
-
-## 運用（エイリアス）
-
-一度セットアップが成功した後は以下のエイリアスが使えます。
-
-    nrsf
-    # sudo nixos-rebuild switch --flake .#ホスト名
-
-    nrb
-    # sudo nixos-rebuild dry-build --flake .#ホスト名
-
-## トラブルシュート
 
 ### ユーザー名不一致で詰まった場合の復旧手順
 
