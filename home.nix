@@ -42,6 +42,7 @@ in
     ghostty
 
     google-chrome
+    zoom.us
 
     podman
     podman-compose
@@ -50,7 +51,6 @@ in
     gimp
 
     audacity
-    handbrake
     obs-studio
     shotcut
     shotwell
