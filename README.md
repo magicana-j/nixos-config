@@ -50,12 +50,12 @@
 
     cd mynixos
 
-`flake.nix` の `vars` ブロックでユーザー名、フルネーム、ホスト名を編集します。
-特にユーザー名はインストール時のログイン名と一致させてください。
+`flake.nix` の `vars` ブロックでユーザー名、ホスト名、タイムゾーン、gitユーザー名・メールアドレスを編集します。
+特にユーザー名はインストール時のログイン名と一致させるのを忘れないでください。
 
 ### 4. nixos-rebuild を実行
 
-    cd ../nixos
+    cd ../mynixos
     sudo nixos-rebuild switch --flake .#nixos-pc
 
 ### 5. 再起動
