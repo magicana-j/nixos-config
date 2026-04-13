@@ -55,7 +55,6 @@
 
 ### 4. nixos-rebuild を実行
 
-    cd ../mynixos
     sudo nixos-rebuild switch --flake .#nixos-pc
 
 ### 5. 再起動
