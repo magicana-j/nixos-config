@@ -28,12 +28,12 @@
           localeEN = "en_US.UTF-8";
         };
         user = {
-          userName = "amuharai";
+          userName = "yourname";
           shell = "bash";
         };
         git = {
-          name = "magicana-j";
-          email = "amuharai@example.dom";
+          name = "Change Me";
+          email = "yourname@example.dom";
         };
       };
 
