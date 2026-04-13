@@ -133,6 +133,23 @@
   nixpkgs.config.allowUnfree = true;
 
   # ================================
+  # Podman（コンテナ）
+  # ================================
+  
+  # Podman自体の有効化
+  virtualisation.podman.enable = true;
+
+  # レジストリの設定
+  virtualisation.containers.registries = {
+    # 1. 検索対象とするレジストリの優先順位
+    search = [
+      "docker.io"
+      "quay.io"
+      "ghcr.io"
+    ];
+  };
+
+  # ================================
   # システム共通パッケージ
   # ================================
   environment.systemPackages = with pkgs; [
@@ -143,6 +160,8 @@
     lxqt.lxqt-archiver
     xarchiver
     source-han-code-jp
+    
+    podman podman-compose
   ];
 
   # ================================

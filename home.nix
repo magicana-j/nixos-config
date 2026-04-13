@@ -83,8 +83,6 @@
     google-chrome
     zoom-us
 
-    podman podman-compose
-
     shotwell gimp
 
     audacity ffmpeg obs-studio shotcut shotwell
