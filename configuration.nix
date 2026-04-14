@@ -54,6 +54,7 @@
   # Enable the Cinnamon Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
+  services.xserver.desktopManager.lxqt.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -82,7 +83,6 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
 
   # ================================
   # fcitx5日本語入力システム
@@ -133,6 +133,24 @@
   nixpkgs.config.allowUnfree = true;
 
   # ================================
+  # キーリング解除
+  # ================================
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+
+  # ================================
+  # バイナリが必要とするライブラリ
+  # ================================
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    fuse3
+    gtk3
+    glib
+  ];
+
+  # ================================
   # Podman（コンテナ）
   # ================================
   
@@ -157,10 +175,19 @@
     wget
     curl
     git
+    pv
     lxqt.lxqt-archiver
     xarchiver
     source-han-code-jp
+
+    seahorse
     
+    gparted
+
+    binutils gcc gnumake cmake pkg-config
+    go rustc cargo nodejs-slim poetry
+    swi-prolog
+
     podman podman-compose
   ];
 

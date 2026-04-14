@@ -75,9 +75,8 @@
     #vim
     neovim 
     geany
+    evince
     
-    gparted
-
     tmux wezterm ghostty
 
     google-chrome
@@ -88,6 +87,7 @@
     audacity ffmpeg obs-studio shotcut shotwell
     vlc
 
+    # 後でもいいもの
     libreoffice-still
 
   ];
