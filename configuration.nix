@@ -54,7 +54,7 @@
   # Enable the Cinnamon Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
-  services.xserver.desktopManager.lxqt.enable = true;
+  #services.xserver.desktopManager.lxqt.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -121,7 +121,7 @@
   # ================================
   users.users.${vars.user.userName} = {
     isNormalUser = true;
-    description = "${vars.user.userName} user";
+    description = vars.user.userFullName;
     extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
     shell = pkgs.${vars.user.shell};
   };
